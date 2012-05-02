@@ -11,6 +11,6 @@ typeset -r script_name="$(basename ${0})"
 for file in $(git ls-tree --name-only master)
 do
     if [[ ! ($file == $script_name) ]]; then
-        ln -s "$from_path/$file" "$HOME/$file"
+        ln -s "$from_path/$file" "$HOME/"
     fi
 done
