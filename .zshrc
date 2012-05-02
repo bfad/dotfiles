@@ -33,6 +33,10 @@ setopt AUTO_PUSHD
 typeset -U path
 path=('/usr/local/lib/ruby/gems/1.9.1/bin' '/usr/local/mysql/bin' '/usr/local/bin' $path)
 
+# Function Path Setup
+fpath=($HOME/.zsh/func $fpath)
+typeset -U fpath
+
 EDITOR="$(which vim)"
 
 
