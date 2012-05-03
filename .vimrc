@@ -84,6 +84,13 @@ autocmd BufReadPost *
 augroup END
 
 
+""""""""""""""""""""
+" Status Bar Setup "
+""""""""""""""""""""
+set statusline=[%Y]\ %<%f\ %=%w%h%r%m%-14.(%l,%c%V%)\ %p
+set laststatus=2
+
+
 """"""""""""""""""""" 
 " Highlight Options "
 """"""""""""""""""""" 
