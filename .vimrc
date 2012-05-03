@@ -30,6 +30,10 @@ set nocompatible
 "       $> git clone https://github.com/scrooloose/snipmate-snippets.git
 "       $> cd snipmate-snippets
 "       $> rake deploy_local
+"
+" supertab
+"   Allows for all your insert completion (|ins-completion|) with <Tab>.
+"       (https://github.com/ervandew/supertab)
 
 
 """""""""""""""""""""""""""""
