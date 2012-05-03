@@ -11,6 +11,11 @@ set nocompatible
 "   Provides insert mode auto-completion for quotes, parens, brackets, etc.
 "       (https://github.com/Raimondi/delimitMate)
 "       (http://www.vim.org/scripts/script.php?script_id=2754)
+"
+" surround
+"   Provides mappings to easily delete, change and add surrounding pairs.
+"       (https://github.com/tpope/vim-surround)
+"       (http://www.vim.org/scripts/script.php?script_id=1697)
 
 
 """""""""""""""""""""""""""""
