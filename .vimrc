@@ -21,6 +21,15 @@ set nocompatible
 "   Provides a Textmate-like ability to open files / buffers in few keystrokes.
 "       (https://wincent.com/products/command-t)
 "       (https://github.com/wincent/Command-T)
+"
+" snipMate
+"   Provides some of TextMate's snippets features in Vim.
+"       (https://github.com/msanders/snipmate.vim)
+"       (http://www.vim.org/scripts/script.php?script_id=2540)
+"   Got snippets from https://github.com/scrooloose/snipmate-snippets
+"       $> git clone https://github.com/scrooloose/snipmate-snippets.git
+"       $> cd snipmate-snippets
+"       $> rake deploy_local
 
 
 """""""""""""""""""""""""""""
