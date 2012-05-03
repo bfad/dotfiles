@@ -16,6 +16,11 @@ set nocompatible
 "   Provides mappings to easily delete, change and add surrounding pairs.
 "       (https://github.com/tpope/vim-surround)
 "       (http://www.vim.org/scripts/script.php?script_id=1697)
+"
+" Command-T
+"   Provides a Textmate-like ability to open files / buffers in few keystrokes.
+"       (https://wincent.com/products/command-t)
+"       (https://github.com/wincent/Command-T)
 
 
 """""""""""""""""""""""""""""
@@ -36,6 +41,9 @@ set wildmenu    " enhanced command-line completion - display options when hit ta
 if has('mouse')
   set mouse=a
 endif
+
+" Map leader for help with quick command shortcuts
+let mapleader = ","
 
 
 """"""""""""""""""""
