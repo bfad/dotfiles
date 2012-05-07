@@ -10,7 +10,7 @@ endif
 
 " Get SQL Formatting for strings
 syn include @sqlTop syntax/sql.vim
-syn cluster sqlTop remove=sqlString,mysqlString
+syn cluster sqlTop remove=sqlString,mysqlString,sqlComment,mysqlComment
 
 syn case ignore
 
