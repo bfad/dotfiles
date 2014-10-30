@@ -31,7 +31,7 @@ setopt AUTO_PUSHD
 # PATH setup
 # This gets rid of the right-most duplicate entries
 typeset -U path
-path=('/usr/local/lib/ruby/gems/1.9.1/bin' '/usr/local/mysql/bin' '/usr/local/bin' $path)
+path=('/var/lasso/home/bin' '/usr/local/lib/ruby/gems/2.0.0/bin' '/usr/local/mysql/bin' '/usr/local/homebrew/bin' '/usr/local/bin' $path)
 
 # Function Path Setup
 fpath=($HOME/.zsh/func $fpath)
@@ -107,3 +107,5 @@ alias ll='ls -l -G -h -p '
 
 # Get setup-specific aliases if they exist
 if [[ -e ~/.zshaliases ]]; then; source ~/.zshaliases; fi;
+
+PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
