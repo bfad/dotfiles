@@ -108,4 +108,6 @@ alias ll='ls -l -G -h -p '
 # Get setup-specific aliases if they exist
 if [[ -e ~/.zshaliases ]]; then; source ~/.zshaliases; fi;
 
-PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
+source /usr/local/opt/chruby/share/chruby/chruby.sh
+#To enable auto-switching of Rubies specified by .ruby-version files
+#source /usr/local/opt/chruby/share/chruby/auto.sh
