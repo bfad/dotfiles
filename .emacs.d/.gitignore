@@ -1,0 +1,10 @@
+*#
+*~
+.emacs.desktop*
+.mc-lists.el
+elpa
+ac-comphist.dat
+ido.last
+places
+projectile-bookmarks.eld
+recentf
