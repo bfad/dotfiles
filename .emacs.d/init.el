@@ -1,3 +1,9 @@
+;; Added by Package.el.  This must come before configurations of
+;; installed packages.  Don't delete this line.  If you don't want it,
+;; just comment it out by adding a semicolon to the start of the line.
+;; You may delete these explanatory comments.
+(package-initialize)
+
 ;; Start with adding packages
 (load "~/.emacs.d/init/packages")
 (load "~/.emacs.d/init/cursor_movement")
@@ -81,7 +87,7 @@
 ;; must be other things that the (GUI) sets up that allow for this.
 ;;
 ;; Decided to keep the OS X clipboard separate from Emacs' kill ring.
-;; Most of this is for the GUI since the terminal keeps separate be default.
+;; Most of this is for the GUI since the terminal keeps separate by default.
 (setq interprogram-cut-function nil)
 (setq interprogram-paste-function nil)
 (defun osx-pbpaste ()
@@ -369,6 +375,12 @@ automatically but projectile-find-file will still be called."
 
 ;; Elm mode
 (require 'elm-mode)
+
+;; Alchemist for Elixir
+(require 'alchemist)
+
+;; Handlebars templates
+(require 'handlebars-mode)
 
 ;; Configuration for helm-ag
 ;(custom-set-variables

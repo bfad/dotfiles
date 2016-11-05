@@ -19,6 +19,8 @@
                     ;'auto-complete
                     'company
                     'company-flx
+                    'company-inf-ruby
+                    'company-web
                     'yasnippet
                     'web-mode
                     'chruby
@@ -39,6 +41,7 @@
                     'dockerfile-mode
                     'yaml-mode
                     'elm-mode
+                    'handlebars-mode
                     ;'helm
                     ;'helm-projectile
                     ;'helm-ag ;; Can use with ack
