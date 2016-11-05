@@ -31,7 +31,7 @@ setopt AUTO_PUSHD
 # PATH setup
 # This gets rid of the right-most duplicate entries
 typeset -U path
-path=('/var/lasso/home/bin' '/usr/local/lib/ruby/gems/2.0.0/bin' '/usr/local/mysql/bin' '/usr/local/homebrew/bin' '/usr/local/bin' $path)
+path=('/var/lasso/home/bin' '/usr/local/lib/ruby/gems/2.0.0/bin' '/usr/local/mysql/bin' '/usr/local/bin' $path)
 
 # Function Path Setup
 fpath=($HOME/.zsh/func $fpath)
@@ -110,4 +110,4 @@ if [[ -e ~/.zshaliases ]]; then; source ~/.zshaliases; fi;
 
 source /usr/local/opt/chruby/share/chruby/chruby.sh
 #To enable auto-switching of Rubies specified by .ruby-version files
-#source /usr/local/opt/chruby/share/chruby/auto.sh
+source /usr/local/opt/chruby/share/chruby/auto.sh
