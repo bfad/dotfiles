@@ -161,6 +161,9 @@ automatically but projectile-find-file will still be called."
  '(cursor-type (quote bar))
  '(desktop-restore-in-current-display t)
  '(desktop-save-mode t)
+ '(package-selected-packages
+   (quote
+    (lua-mode git-commit yasnippet yari yaml-mode web-mode slim-mode scss-mode sass-mode rspec-mode robe rinari rainbow-mode projectile origami neotree multiple-cursors markdown-mode magit key-chord ido-vertical-mode hydra fuzzy flx-ido elm-mode dockerfile-mode company-web company-inf-ruby company-flx coffee-mode chruby auto-complete alchemist ag)))
  '(safe-local-variable-values
    (quote
     ((eval when
@@ -193,8 +196,12 @@ automatically but projectile-find-file will still be called."
 ;; Alchemist for Elixir
 (require 'alchemist)
 
-;; Handlebars templates
-(require 'handlebars-mode)
+;; Pug templates
+(require 'pug-mode)
+
+;; Web Mode
+(require 'web-mode)
+(add-to-list 'auto-mode-alist '("\\.tmpl\\'" . web-mode))
 
 ;; Configuration for helm-ag
 ;(custom-set-variables
