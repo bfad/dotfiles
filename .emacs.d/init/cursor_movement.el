@@ -33,6 +33,79 @@ https://lists.gnu.org/archive/html/emacs-devel/2007-01/msg01025.html"
   (interactive "^p")
   (forward-symbol (- (or arg 1))))
 
+
+;; ----------------------- ;;
+;; Functions for Selection ;;
+;; ----------------------- ;;
+;; Modified from http://emacs.stackexchange.com/a/22166/93
+(defun my-mark-to-end-of-line (&optional arg)
+  "Uses shift selection to select to the end of the current line.
+When there is an existing shift selection, extends the selection."
+  (interactive "p")
+  (let ((oldval (or (cdr-safe transient-mark-mode) transient-mark-mode))
+        (beg (and mark-active (mark-marker))))
+    (unless beg
+      ;;(end-of-line) ;;(beginning-of-line))
+      (setq beg (point-marker)))
+    ;;(if backwards (end-of-line (- 1 arg)) (beginning-of-line (+ 1 arg)))
+    (end-of-line arg)
+    (unless mark-active
+      (push-mark beg nil t))
+    (setq transient-mark-mode (cons 'only oldval))))
+
+;; Modified from http://emacs.stackexchange.com/a/22166/93
+(defun my-mark-to-smarter-beginning-of-line (&optional arg)
+  "Uses shift selection to select the beginning of the current line.
+When there is an existing shift selection, extends the selection."
+  (interactive "p")
+  (let ((oldval (or (cdr-safe transient-mark-mode) transient-mark-mode))
+        (beg (and mark-active (mark-marker))))
+    (unless beg
+      (setq beg (point-marker)))
+    (smarter-move-beginning-of-line arg)
+    (unless mark-active
+      (push-mark beg nil t))
+    (setq transient-mark-mode (cons 'only oldval))))
+
+;; Modified from http://emacs.stackexchange.com/a/22166/93
+(defun my-mark-to-end-of-buffer (&optional arg)
+  "Uses shift selection to select to the end of the buffer.
+When there is an existing shift selection, extends the selection."
+  (interactive "p")
+  (let ((oldval (or (cdr-safe transient-mark-mode) transient-mark-mode))
+        (beg (and mark-active (mark-marker))))
+    (unless beg
+      ;;(end-of-line) ;;(beginning-of-line))
+      (setq beg (point-marker)))
+    ;;(if backwards (end-of-line (- 1 arg)) (beginning-of-line (+ 1 arg)))
+    ;;(end-of-buffer arg)
+    (goto-char (point-max))
+    (unless mark-active
+      (push-mark beg nil t))
+    (setq transient-mark-mode (cons 'only oldval))))
+
+;; Modified from http://emacs.stackexchange.com/a/22166/93
+(defun my-mark-to-beginning-of-buffer (&optional arg)
+  "Uses shift selection to select the beginning of the buffer.
+When there is an existing shift selection, extends the selection."
+  (interactive "p")
+  (let ((oldval (or (cdr-safe transient-mark-mode) transient-mark-mode))
+        (beg (and mark-active (mark-marker))))
+    (unless beg
+      (setq beg (point-marker)))
+    ;;(beginning-of-buffer arg)
+    (goto-char (point-min))
+    (unless mark-active
+      (push-mark beg nil t))
+    (setq transient-mark-mode (cons 'only oldval))))
+
+(defun my-kill-to-beginning-of-line ()
+  (interactive)
+  (kill-line 0)
+  (indent-according-to-mode))
+
+
+
 ;; remap C-a to `smarter-move-beginning-of-line'
 (global-set-key [remap move-beginning-of-line]
                 'smarter-move-beginning-of-line)
@@ -61,6 +134,28 @@ https://lists.gnu.org/archive/html/emacs-devel/2007-01/msg01025.html"
 (global-set-key (kbd "s-<up>") 'beginning-of-buffer)
 (global-set-key (kbd "s-<down>") 'end-of-buffer)
 
+
+;; Deleting
+(global-set-key (kbd "s-<backspace>") 'my-kill-to-beginning-of-line)
+;; For iTerm s-<backspace> is mapped to C-S-M-delete
+(global-set-key (kbd "C-S-M-<delete>") 'my-kill-to-beginning-of-line)
+;(lambda ()
+;                                        (interactive)
+;                                        (kill-line 0)
+;                                        (indent-according-to-mode)))
+
+
+;; Selection
+;; found these escape sequences by pressing C-h b
+;; M-[ 1 ; 8 A     <C-M-S-up>
+;; M-[ 1 ; 8 B     <C-M-S-down>
+;; M-[ 1 ; 8 C     <C-M-S-right>
+;; M-[ 1 ; 8 D     <C-M-S-left>
+;; Setup iTerm to send the sequences when pressing s-S-arrow
+(global-set-key (kbd "C-M-S-<right>") 'my-mark-to-end-of-line)
+(global-set-key (kbd "C-M-S-<left>") 'my-mark-to-smarter-beginning-of-line)
+(global-set-key (kbd "C-M-S-<up>") 'my-mark-to-beginning-of-buffer)
+(global-set-key (kbd "C-M-S-<down>") 'my-mark-to-end-of-buffer)
 
 ;; Other keyboard setup
 (setq mac-right-option-modifier nil)
