@@ -55,8 +55,8 @@
   ("C-S-<down>" mc/mark-next-like-this)
   ("C-S-<up>" mc/mark-previous-like-this)
   ;; Setup these bindings in iTerm so behaves like the GUI keys above.
-  ("<f13> n" mc/mark-next-like-this)
-  ("<f13> p" mc/mark-previous-like-this)
+  ("<f12> n" mc/mark-next-like-this)
+  ("<f12> p" mc/mark-previous-like-this)
 
   ("c" hydra-cursors/body "Code Folding Mode", :exit t)
   ("q" hydra-modes/body "Quit" :exit t)
