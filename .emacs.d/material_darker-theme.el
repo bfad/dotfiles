@@ -95,6 +95,7 @@
  '(font-lock-type-face ((t (:foreground "#89DDFF"  ))))
  '(font-lock-string-face ((t (:foreground "#C3E88D"  ))))
  '(font-lock-constant-face ((t (:foreground "#F77669"  ))))
+ '(font-lock-builtin-face ((t (:foreground "#B0C4DE"  ))))
  '(diff-added ((t (:foreground "#F1E655"  ))))
  '(diff-removed ((t (:foreground "#ff5370"  ))))
  '(diff-changed ((t (:foreground "#c792ea"  ))))
