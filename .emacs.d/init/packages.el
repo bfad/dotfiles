@@ -7,6 +7,7 @@
 
 (let ((my-packages (list
                     'magit
+                    'git-commit
                     'multiple-cursors
                     'origami
                     'key-chord
