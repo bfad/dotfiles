@@ -105,6 +105,7 @@
 ;; Configure neotree
 (require 'neotree)
 (global-set-key [f8] 'neotree-toggle)
+(setq neo-window-fixed-size nil)
 
 ;; Adapted from neotree-projectile-action function in neotree project
 (defun my-neotree-projectile-action ()
@@ -148,6 +149,9 @@ automatically but projectile-find-file will still be called."
 (require 'yasnippet)
 (yas-reload-all)
 
+;; Configure JS indentation level
+(setq js-indent-level 2)
+
 ;; Configure coffee-mode
 ;; Configure coffee-mode
 (custom-set-variables
@@ -178,6 +182,8 @@ automatically but projectile-find-file will still be called."
             (rainbow-mode 1)
             ))
 
+(setq-default elm-indent-offset 2)
+
 ;; Load ruby settings
 (load "~/.emacs.d/init/ruby")
 
@@ -207,6 +213,10 @@ automatically but projectile-find-file will still be called."
 ;(custom-set-variables
 ;  '(helm-ag-base-command "ack --nocolor --nogroup"))
 
+;; Set Emacs variable exec-path if launching MacOS GUI
+;; Useful for MacOS GUI and using ag.el when ag is in /usr/local/bin
+(when (memq window-system '(mac ns))
+  (exec-path-from-shell-initialize))
 
 
 (custom-set-faces

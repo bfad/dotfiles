@@ -33,6 +33,10 @@
             (robe-mode 1)
             ))
 
+;; Disable adding magic encoding comments to UTF-8 files
+(setq ruby-insert-encoding-magic-comment nil)
+(setq enh-ruby-add-encoding-comment-on-save 0)
+
 ;; Configure robe company support
 (eval-after-load 'company
   '(push 'company-robe company-backends))
