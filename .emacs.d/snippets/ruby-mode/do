@@ -1,5 +1,6 @@
 #name : do ... end
 #group : control structure
 # --
-do${0}
+do
+  $0
 end
