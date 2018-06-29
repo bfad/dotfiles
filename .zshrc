@@ -37,7 +37,7 @@ path=('/var/lasso/home/bin' '/usr/local/lib/ruby/gems/2.0.0/bin' '/usr/local/mys
 fpath=($HOME/.zsh/func $fpath)
 typeset -U fpath
 
-EDITOR="$(which vim)"
+EDITOR="$(which emacs) -nw --no-desktop"
 
 
 ###############
