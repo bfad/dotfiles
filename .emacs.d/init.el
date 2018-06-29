@@ -96,7 +96,7 @@
 ;; Configure projectile
 (projectile-global-mode)
 (global-set-key (kbd "s-t") 'projectile-find-file)
-(global-set-key (kbd "<f13> t") 'projectile-find-file)
+(global-set-key (kbd "<f12> t") 'projectile-find-file)
 
 ;; Configure Origami for code folding
 (require 'origami)

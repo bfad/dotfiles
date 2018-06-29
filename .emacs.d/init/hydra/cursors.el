@@ -17,8 +17,8 @@
   ("C-S-<down>" mc/mark-next-like-this)
   ("C-S-<up>" mc/mark-previous-like-this)
   ;; Setup these bindings in iTerm so behaves like the GUI keys above.
-  ("<f13> n" mc/mark-next-like-this)
-  ("<f13> p" mc/mark-previous-like-this)
+  ("<f12> n" mc/mark-next-like-this)
+  ("<f12> p" mc/mark-previous-like-this)
 
   ("sn" mc/skip-to-next-like-this "Skip & Next")
   ("sp" mc/skip-to-previous-like-this "Skip & Previous")
