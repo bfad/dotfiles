@@ -14,6 +14,7 @@
                     'flx-ido
                     'ido-vertical-mode
                     'ag
+                    'exec-path-from-shell
                     'neotree
                     'hydra
                     ;'auto-complete
@@ -41,7 +42,8 @@
                     'dockerfile-mode
                     'yaml-mode
                     'elm-mode
-                    'handlebars-mode
+                    'pug-mode
+                    'nginx-mode
                     ;'helm
                     ;'helm-projectile
                     ;'helm-ag ;; Can use with ack
