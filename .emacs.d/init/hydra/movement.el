@@ -59,5 +59,7 @@
   ("<f12> p" mc/mark-previous-like-this)
 
   ("c" hydra-cursors/body "Code Folding Mode", :exit t)
+  ("t" origami-recursively-toggle-node "Toggle Folding")
+
   ("q" hydra-modes/body "Quit" :exit t)
  )

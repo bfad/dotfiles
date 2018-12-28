@@ -9,6 +9,7 @@
                     'magit
                     'git-commit
                     'multiple-cursors
+                    'visual-fill-column
                     'origami
                     'key-chord
                     'projectile
