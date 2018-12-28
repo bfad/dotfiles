@@ -13,5 +13,5 @@
       (set-fontset-font t 'unicode "Apple Color Emoji" nil 'prepend)))
               ;;))
 
-
+(add-to-list 'default-frame-alist '(ns-appearance . dark))
 (load-theme 'material_darker t)

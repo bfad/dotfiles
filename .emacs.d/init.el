@@ -94,7 +94,8 @@
 
 
 ;; Configure projectile
-(projectile-global-mode)
+(projectile-mode +1)
+(define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
 (global-set-key (kbd "s-t") 'projectile-find-file)
 (global-set-key (kbd "<f12> t") 'projectile-find-file)
 
@@ -167,7 +168,7 @@ automatically but projectile-find-file will still be called."
  '(desktop-save-mode t)
  '(package-selected-packages
    (quote
-    (lua-mode git-commit yasnippet yari yaml-mode web-mode slim-mode scss-mode sass-mode rspec-mode robe rinari rainbow-mode projectile origami neotree multiple-cursors markdown-mode magit key-chord ido-vertical-mode hydra fuzzy flx-ido elm-mode dockerfile-mode company-web company-inf-ruby company-flx coffee-mode chruby auto-complete alchemist ag)))
+    (projectile lua-mode git-commit yasnippet yari yaml-mode web-mode slim-mode scss-mode sass-mode rspec-mode robe rinari rainbow-mode origami neotree multiple-cursors markdown-mode magit key-chord ido-vertical-mode hydra fuzzy flx-ido elm-mode dockerfile-mode company-web company-inf-ruby company-flx coffee-mode chruby auto-complete alchemist ag)))
  '(safe-local-variable-values
    (quote
     ((eval when
