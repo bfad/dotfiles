@@ -115,6 +115,19 @@ if [[ -e ~/.zshaliases ]]; then; source ~/.zshaliases; fi;
 # Enable iex shell history (Elixir REPL)
 export ERL_AFLAGS="-kernel shell_history enabled"
 
+###############
+# ZSH Plugins #
+###############
+source ~/.zshplugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=23'
+#bindkey '^[^m' autosuggest-accept
+bindkey '^[^m' autosuggest-execute
+bindkey '^x' autosuggest-execute
+
+source ~/.zshplugins/zsh-history-substring-search/zsh-history-substring-search.zsh
+bindkey '^[[A' history-substring-search-up
+bindkey '^[[B' history-substring-search-down
+
 source /usr/local/opt/chruby/share/chruby/chruby.sh
 #To enable auto-switching of Rubies specified by .ruby-version files
 source /usr/local/opt/chruby/share/chruby/auto.sh
