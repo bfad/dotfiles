@@ -31,7 +31,7 @@ setopt AUTO_PUSHD
 # PATH setup
 # This gets rid of the right-most duplicate entries
 typeset -U path
-path=('/var/lasso/home/bin' '/usr/local/lib/ruby/gems/2.0.0/bin' '/usr/local/mysql/bin' '/usr/local/bin' $path)
+path=('/usr/local/bin' $path)
 
 # Function Path Setup
 fpath=($HOME/.zsh/func $fpath)
@@ -105,8 +105,8 @@ zstyle ':vcs_info:git*' unstagedstr 'M'
 alias ls='ls -G -h -p '
 alias ll='ls -l -G -h -p '
 
-# Get setup-specific aliases if they exist
-if [[ -e ~/.zshaliases ]]; then; source ~/.zshaliases; fi;
+# Get setup-specific configuration if it exists
+if [[ -e ~/.zshlocal ]]; then; source ~/.zshlocal; fi;
 
 
 #################
