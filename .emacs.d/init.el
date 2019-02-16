@@ -12,6 +12,12 @@
 (load "~/.emacs.d/init/editor")
 (load "~/.emacs.d/init/appearance")
 
+;; Emacs desktop (saves state to reload when reopening)
+;; When running an emacs daemon, start it with `--no-desktop` option so it won't
+;; load the desktop frames itself. To load saved desktop in GUI client, run:
+;; `emacsclient -n -c -e '(progn (desktop-save-mode 1) (desktop-read))`
+(setq desktop-restore-in-current-display t)
+(desktop-save-mode 1)
 
 ;; Setup auto-complete
 ;;(require 'auto-complete-config)
@@ -152,6 +158,7 @@ automatically but projectile-find-file will still be called."
 
 ;; Configure JS indentation level
 (setq js-indent-level 2)
+(setq coffee-tab-width 2)
 
 ;; Configure coffee-mode
 ;; Configure coffee-mode
@@ -162,10 +169,7 @@ automatically but projectile-find-file will still be called."
  ;; If there is more than one, they won't work right.
  '(ansi-color-names-vector
    ["black" "red3" "green3" "yellow3" "blue2" "magenta3" "cyan3" "gray90"])
- '(coffee-tab-width 2)
  '(cursor-type (quote bar))
- '(desktop-restore-in-current-display t)
- '(desktop-save-mode t)
  '(package-selected-packages
    (quote
     (projectile lua-mode git-commit yasnippet yari yaml-mode web-mode slim-mode scss-mode sass-mode rspec-mode robe rinari rainbow-mode origami neotree multiple-cursors markdown-mode magit key-chord ido-vertical-mode hydra fuzzy flx-ido elm-mode dockerfile-mode company-web company-inf-ruby company-flx coffee-mode chruby auto-complete alchemist ag)))
