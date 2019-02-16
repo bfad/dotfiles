@@ -160,6 +160,10 @@ automatically but projectile-find-file will still be called."
 (setq js-indent-level 2)
 (setq coffee-tab-width 2)
 
+;; Setup git config
+(require 'git-commit)
+(add-hook 'git-commit-mode-hook (lambda () (setq-default fill-column 72)))
+
 ;; Configure coffee-mode
 ;; Configure coffee-mode
 (custom-set-variables
