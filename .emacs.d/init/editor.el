@@ -175,14 +175,8 @@
 
 ;; Multiple-Cursors Key Bindings
 ;; https://github.com/magnars/multiple-cursors.el
-;;
-;; For the GUI
 (global-set-key (kbd "C-S-<down>") 'mc/mark-next-like-this)
 (global-set-key (kbd "C-S-<up>") 'mc/mark-previous-like-this)
-;; Setup these bindings in iTerm so behaves like the GUI.
-(global-set-key (kbd "<f12> n") 'mc/mark-next-like-this)
-(global-set-key (kbd "<f12> p") 'mc/mark-previous-like-this)
-;; Global
 (global-set-key (kbd "M-n") 'mc/mark-next-like-this-word)
 (global-set-key (kbd "M-p") 'mc/mark-previous-word-like-this)
 (global-set-key (kbd "M-l") 'mc/edit-lines)
@@ -190,7 +184,7 @@
 ;; Similar to what I had before
 (global-set-key (kbd "M-U") 'downcase-word)
 
-;; Setup these bindings in iTerm to get GUI commands
+;; Setup these bindings in iTerm/kitty to get GUI commands
 ;; The <f12> key represents the command key in the GUI
 (global-set-key (kbd "<f12> k") 'kill-this-buffer)
 (global-set-key (kbd "<f12> z") 'undo)
@@ -222,6 +216,10 @@ used in the \"kill-buffer-query-functions\" list for non-file-visiting.
 
 (global-set-key (kbd "s-n") 'buffer-new)
 (global-set-key (kbd "s-N") '(lambda () (interactive) (make-frame) (buffer-new)))
+
+;; Setup these bindings in iTerm/kitty so behaves like the GUI.
+(global-set-key (kbd "<f12> n") 'buffer-new)
+
 
 
 ;; Nice way to rename a file
