@@ -11,6 +11,7 @@
 ;; Put anything relating to basic editor behavior and navigation in here
 (load "~/.emacs.d/init/editor")
 (load "~/.emacs.d/init/appearance")
+(load "~/.emacs.d/init/terminal")
 
 ;; Emacs desktop (saves state to reload when reopening)
 ;; When running an emacs daemon, start it with `--no-desktop` option so it won't
@@ -176,7 +177,7 @@ automatically but projectile-find-file will still be called."
  '(cursor-type (quote bar))
  '(package-selected-packages
    (quote
-    (projectile lua-mode git-commit yasnippet yari yaml-mode web-mode slim-mode scss-mode sass-mode rspec-mode robe rinari rainbow-mode origami neotree multiple-cursors markdown-mode magit key-chord ido-vertical-mode hydra fuzzy flx-ido elm-mode dockerfile-mode company-web company-inf-ruby company-flx coffee-mode chruby auto-complete alchemist ag)))
+    (string-inflection yari slim-mode scss-mode rinari origami key-chord ido-vertical-mode fuzzy flx-ido company-web company-inf-ruby company-flx coffee-mode chruby auto-complete alchemist)))
  '(safe-local-variable-values
    (quote
     ((eval when
