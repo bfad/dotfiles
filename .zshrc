@@ -99,6 +99,18 @@ zstyle ':vcs_info:git*' stagedstr   'M'
 zstyle ':vcs_info:git*' unstagedstr 'M'
 
 
+##########
+# Open new tabs in same directory
+#########
+if [[ "$TERM_PROGRAM" == "Apple_Terminal" ]]; then
+  function chpwd {
+    # Should have better percent-encoding then just space replacement
+    printf '\e]7;%s\a' "file://$HOSTNAME${PWD// /%20}"
+  }
+  chpwd
+fi
+
+
 ###########
 # Aliases #
 ###########
