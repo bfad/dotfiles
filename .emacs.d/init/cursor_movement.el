@@ -134,6 +134,11 @@ When there is an existing shift selection, extends the selection."
 (global-set-key (kbd "s-<up>") 'beginning-of-buffer)
 (global-set-key (kbd "s-<down>") 'end-of-buffer)
 
+;; Configure Avy
+(global-set-key (kbd "C-c c") 'avy-goto-char-timer)
+; Turn on while in isearch
+(eval-after-load "isearch"
+    '(define-key isearch-mode-map (kbd "C-j") 'avy-isearch))
 
 ;; Deleting
 (global-set-key (kbd "s-<backspace>") 'my-kill-to-beginning-of-line)
@@ -143,7 +148,6 @@ When there is an existing shift selection, extends the selection."
 ;                                        (interactive)
 ;                                        (kill-line 0)
 ;                                        (indent-according-to-mode)))
-
 
 ;; Selection
 ;; found these escape sequences by pressing C-h b

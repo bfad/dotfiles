@@ -20,6 +20,7 @@
                     'exec-path-from-shell
                     'neotree
                     'hydra
+                    'avy
                     ;'auto-complete
                     'company
                     'company-flx
