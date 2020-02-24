@@ -34,46 +34,6 @@
   (company-flx-mode +1))
 
 
-;; Helm Configuration
-;; Much of this is taken from Prelude:
-;;    https://github.com/bbatsov/prelude/blob/master/modules/prelude-helm.el
-;;    https://github.com/bbatsov/prelude/blob/master/modules/prelude-helm-everywhere.el
-;;(require 'helm-config)
-;;(require 'helm-projectile)
-;;
-;;(setq helm-split-window-in-side-p           t
-;;      helm-buffers-fuzzy-matching           t
-;;      helm-move-to-line-cycle-in-source     t
-;;      helm-ff-search-library-in-sexp        t
-;;      helm-ff-file-name-history-use-recentf t)
-;;;; The default "C-x c" is quite close to "C-x C-c", which quits Emacs.
-;;;; Changed to "C-c h". Note: We must set "C-c h" globally, because we
-;;;; cannot change `helm-command-prefix-key' once `helm-config' is loaded.
-;;(global-set-key (kbd "C-c h") 'helm-command-prefix)
-;;(global-unset-key (kbd "C-x c"))
-;;
-;;(global-set-key (kbd "M-x") 'helm-M-x)
-;;(global-set-key (kbd "C-x C-m") 'helm-M-x)
-;;(global-set-key (kbd "M-y") 'helm-show-kill-ring)
-;;(global-set-key (kbd "C-x b") 'helm-mini)
-;;(global-set-key (kbd "C-x C-b") 'helm-buffers-list)
-;;(global-set-key (kbd "C-x C-f") 'helm-find-files)
-;;(global-set-key (kbd "C-h f") 'helm-apropos)
-;;(global-set-key (kbd "C-h r") 'helm-info-emacs)
-;;(global-set-key (kbd "C-h C-l") 'helm-locate-library)
-;;
-;;(define-key helm-command-map (kbd "o")     'helm-occur)
-;;(define-key helm-command-map (kbd "g")     'helm-do-grep)
-;;(define-key helm-command-map (kbd "C-c w") 'helm-wikipedia-suggest)
-;;(define-key helm-command-map (kbd "SPC")   'helm-all-mark-rings)
-;;
-;;
-;;(setq projectile-completion-system 'helm)
-;;(helm-descbinds-mode)
-;;(helm-mode 1)
-;;;;;(helm-projectile-on) ; enable Helm version of Projectile with replacment commands
-
-
 ;; Configure ido
 (require 'flx-ido)
 (require 'ido-vertical-mode)
@@ -220,10 +180,6 @@ automatically but projectile-find-file will still be called."
 ;; Web Mode
 (require 'web-mode)
 (add-to-list 'auto-mode-alist '("\\.tmpl\\'" . web-mode))
-
-;; Configuration for helm-ag
-;(custom-set-variables
-;  '(helm-ag-base-command "ack --nocolor --nogroup"))
 
 ;; Set Emacs variable exec-path if launching MacOS GUI
 ;; Useful for MacOS GUI and using ag.el when ag is in /usr/local/bin

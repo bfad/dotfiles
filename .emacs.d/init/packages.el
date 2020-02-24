@@ -48,10 +48,6 @@
                     'elm-mode
                     'pug-mode
                     'nginx-mode
-                    ;'helm
-                    ;'helm-projectile
-                    ;'helm-ag ;; Can use with ack
-                    ;'helm-descbinds
                     ))
       (package-list-refreshed nil))
 
