@@ -53,46 +53,20 @@
 ;; When you've hit the breakpoint, hit C-x C-q to enable inf-ruby
 (add-hook 'after-init-hook 'inf-ruby-switch-setup)
 
-(defun terminal-run-command-in-custom-window (command window_title &optional new_window_dir)
-  "description"
-  (unless new_window_dir (setq new_window_dir "~"))
-  (setq command (s-replace "\"" "\\\"" command))
-  (setq window_title (s-replace "\"" "\\\"" window_title))
-  (setq new_window_dir (s-replace "\"" "\\\"" new_window_dir))
-  (do-applescript (s-replace-all `(("$$COMAND$$" . ,command) ("$$WINDOW_TITLE$$" . ,window_title) ("$$STARTING_DIR$$" . ,new_window_dir)) "\
-tell application \"Terminal\"
-	set customTitle to \"$$WINDOW_TITLE$$\"
-	set foundTab to false
-
-	repeat with W in windows
-		if \"\" is equal to (name of W as string) then
-			exit repeat
-		end if
-
-		if customTitle is equal to (custom title of tab of W as string) then
-			set foundTab to item 1 of (tab of W)
-			set frontmost of W to true
-			set selected of foundTab to true
-			exit repeat
-		end if
-	end repeat
-
-	if foundTab is equal to false then
-		set foundTab to do script \"$$STARTING_DIR$$\"
-		set custom title of foundTab to customTitle
-		set number of rows of foundTab to 29
-		set number of columns of foundTab to 199
-	end if
-
-	activate
-	do script \"$$COMAND$$\" in foundTab
-end tell")))
-
-(defun rspec-rails-app-run-in-terminal ()
+(defun rspec-run-in-terminal ()
   "Runs the current file in the test terminal window"
   (interactive)
   (let ((filename (buffer-file-name)))
     (if (not (and filename (file-exists-p filename)))
         (message "Buffer is not visiting a file!")
-      (let ((relative_path (file-relative-name filename "~/code/rails_app/")))
-        (terminal-run-command-in-custom-window (s-concat "be rspec '" (s-replace "'" "'\"'\"'" relative_path) "'") "Rails App Tests" "~/code/rails_app/")))))
+      (let ((relative_path (file-relative-name filename (projectile-project-root))))
+        (terminal-run-command-in-custom-window (s-concat "be rspec '" (s-replace "'" "'\"'\"'" relative_path) "'") (s-concat (projectile-project-name) ": RSpec") (projectile-project-root))))))
+
+(defun rspec-run-at-point-in-terminal ()
+  "Runs the current file in the test terminal window"
+  (interactive)
+  (let ((filename (buffer-file-name)))
+    (if (not (and filename (file-exists-p filename)))
+        (message "Buffer is not visiting a file!")
+      (let ((relative_path (file-relative-name filename (projectile-project-root))))
+        (terminal-run-command-in-custom-window (s-concat "be rspec '" (s-replace "'" "'\"'\"'" relative_path) ":" (format-mode-line "%l") "'") (s-concat (projectile-project-name) ": RSpec") (projectile-project-root))))))
