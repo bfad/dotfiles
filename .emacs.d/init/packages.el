@@ -16,6 +16,7 @@
                     'flx-ido
                     'ido-vertical-mode
                     'ag
+                    'deadgrep
                     'exec-path-from-shell
                     'neotree
                     'hydra
