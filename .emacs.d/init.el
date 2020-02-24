@@ -132,6 +132,8 @@ automatically but projectile-find-file will still be called."
     (error "Projectile is not available"))))
 (setq projectile-switch-project-action 'my-neotree-projectile-action)
 
+;; Configure RipGrep via deadgrep
+(global-set-key (kbd "C-c s") #'deadgrep)
 
 ;; Configure hydra
 (require 'hydra)
