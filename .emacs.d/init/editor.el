@@ -34,6 +34,7 @@
                         mwheel-scroll my-scroll-up my-scroll-down down up next-line previous-line backward-char forward-char))
           (ding))))
 
+
 ;; Show backtrace for errors
 ;;(setq debug-on-error t)
 
@@ -62,10 +63,6 @@
 	    (setq company-minimum-prefix-length 1)
 	    (setq company-idle-delay 0.3)
            ))
-
-;; Show line and column numbers in the mode line
-(line-number-mode 1)
-(column-number-mode 1)
 
 ;; The linum-mode is turned on for prog-mode, but this creates a function to add
 ;; a little space between the numbers and the text displayed on the terminal.

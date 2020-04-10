@@ -11,6 +11,7 @@
 ;; Put anything relating to basic editor behavior and navigation in here
 (load "~/.emacs.d/init/editor")
 (load "~/.emacs.d/init/appearance")
+(load "~/.emacs.d/init/mode-line")
 (load "~/.emacs.d/init/terminal")
 
 ;; Emacs desktop (saves state to reload when reopening)
