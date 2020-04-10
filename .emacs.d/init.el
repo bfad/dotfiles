@@ -34,37 +34,110 @@
   (company-flx-mode +1))
 
 
-;; Configure ido
-(require 'flx-ido)
-(require 'ido-vertical-mode)
+;; ;; Configure ido
+;; (require 'flx-ido)
+;; (require 'ido-vertical-mode)
 
-;; disable ido faces to see flx highlights.
-(setq ido-enable-flex-matching t)
-(setq ido-use-faces nil)
-(setq ido-vertical-define-keys 'C-n-C-p-up-and-down)
+;; ;; disable ido faces to see flx highlights.
+;; (setq ido-enable-flex-matching t)
+;; (setq ido-use-faces nil)
+;; (setq ido-vertical-define-keys 'C-n-C-p-up-and-down)
 
-(ido-mode 1)
-(ido-everywhere 1)
-(flx-ido-mode 1)
-(ido-vertical-mode 1)
+;; (ido-mode 1)
+;; (ido-everywhere 1)
+;; (flx-ido-mode 1)
+;; (ido-vertical-mode 1)
 
-;Colors Make it look like @abo-abo's: http://oremacs.com/2015/02/09/ido-vertical/
-;(setq ido-use-faces t)
-;(set-face-attribute 'ido-vertical-first-match-face nil
-;                    :background "#e5b7c0")
-;(set-face-attribute 'ido-vertical-only-match-face nil
-;                    :background "#e52b50"
-;                    :foreground "white")
-;(set-face-attribute 'ido-vertical-match-face nil
-;                    :foreground "#b00000")
-;(ido-vertical-mode 1)
+;; ;Colors Make it look like @abo-abo's: http://oremacs.com/2015/02/09/ido-vertical/
+;; ;(setq ido-use-faces t)
+;; ;(set-face-attribute 'ido-vertical-first-match-face nil
+;; ;                    :background "#e5b7c0")
+;; ;(set-face-attribute 'ido-vertical-only-match-face nil
+;; ;                    :background "#e52b50"
+;; ;                    :foreground "white")
+;; ;(set-face-attribute 'ido-vertical-match-face nil
+;; ;                    :foreground "#b00000")
+;; ;(ido-vertical-mode 1)
 
+;; Configure ivy
+(ivy-mode 1)
+(counsel-mode 1)
+(setq ivy-use-virtual-buffers t)
+(setq ivy-wrap t)
+(setq ivy-count-format "")
+(setq ivy-extra-directories nil)
+(define-key ivy-minibuffer-map (kbd "RET") 'ivy-alt-done)
+(define-key ivy-minibuffer-map (kbd "s-g") 'ivy-next-line)
+
+;; Search using the last swiper search term
+(defun my-swiper-isearch-again ()
+  "Start swiper-isearch with the last thing searched for."
+  (interactive)
+  (swiper-isearch (car swiper-history)))
+(global-set-key (kbd "s-g") 'my-swiper-isearch-again)
+
+;; Fuzzy search for all ivy except swiper
+;; https://emacs.stackexchange.com/questions/36745/enable-ivy-fuzzy-matching-everywhere-except-in-swiper
+(setq ivy-re-builders-alist
+      '((swiper         . ivy--regex-plus)
+        (swiper-isearch . ivy--regex-plus)
+        (t              . ivy--regex-fuzzy)))
+
+;; ;; Do fuzzy search only for file names in ivy
+;; (setq ivy-re-builders-alist
+;;       '((read-file-name-internal . ivy--regex-fuzzy)
+;;         (t . ivy--regex-plus)))
+;; The regex doesn't start with ^
+(setq ivy-initial-inputs-alist nil)
+
+;; Use swiper instead of isearch
+(global-set-key (kbd "C-s") 'swiper-isearch)
+(global-set-key (kbd "s-f") 'swiper-isearch)
 
 ;; Configure projectile
 (projectile-mode +1)
+(setq projectile-completion-system 'ivy)
 (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
-(global-set-key (kbd "s-t") 'projectile-find-file)
-(global-set-key (kbd "<f12> t") 'projectile-find-file)
+
+(defun my-ivy-regex (str)
+  "Strip trailing line / column numbers from input"
+  ;; Use ivy's configured regexp builder
+  (funcall (ivy-alist-setting ivy-re-builders-alist)
+           (replace-regexp-in-string "\\(?::[[:digit:]]*\\)\\{0,2\\}$" "" str)))
+
+(defun my-projectile-find-file (&optional invalidate-cache)
+  "Find a file in a project, allowing line / column numbers"
+  (interactive "P")
+  (projectile-maybe-invalidate-cache invalidate-cache)
+  (let* ((project-root (projectile-ensure-project (projectile-project-root)))
+         (file (ivy-read "Find file: "
+                         (projectile-project-files project-root)
+                         :re-builder #'my-ivy-regex
+                         ;; :initial-input Could grab from clipboad, maybe if has multiple slashes?
+                         :sort t
+                         :require-match t
+                         :keymap counsel-find-file-map ;; Maybe not?
+                         :caller 'my-projectile-find-file
+                         )))
+    (when file
+      (find-file (expand-file-name file project-root))
+      ;; Parse line / column number and move cursor to location
+      (save-match-data
+        (when (string-match ":\\([[:digit:]]+\\)\\(?::\\([[:digit:]]+\\)\\)?$" ivy-text)
+          (let ((lino (match-string 1 ivy-text))
+                (colno (match-string 2 ivy-text)))
+            (goto-line (string-to-number lino))
+            (when colno (move-to-column (string-to-number colno))))))
+      (run-hooks 'projectile-find-file-hook))))
+
+;; Make sure we use flx sorting or it sucks
+(add-to-list
+ 'ivy-sort-matches-functions-alist
+ '(my-projectile-find-file . ivy--flx-sort))
+
+(global-set-key (kbd "s-t") 'my-projectile-find-file)
+(global-set-key (kbd "<f12> t") 'my-projectile-find-file)
+
 
 ;; Configure Origami for code folding
 (require 'origami)

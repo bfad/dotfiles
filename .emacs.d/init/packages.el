@@ -13,14 +13,19 @@
                     'origami
                     'key-chord
                     'projectile
-                    'flx-ido
-                    'ido-vertical-mode
+                    ;'flx-ido
+                    ;'ido-vertical-mode
                     'ag
                     'deadgrep
                     'exec-path-from-shell
                     'neotree
                     'hydra
                     'avy
+                    'ivy
+                    'counsel
+                    'swiper
+                    'flx
+                    'smex
                     ;'auto-complete
                     'company
                     'company-flx
