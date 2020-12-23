@@ -143,3 +143,16 @@ bindkey '^[[B' history-substring-search-down
 source /usr/local/opt/chruby/share/chruby/chruby.sh
 #To enable auto-switching of Rubies specified by .ruby-version files
 source /usr/local/opt/chruby/share/chruby/auto.sh
+
+
+# Setup fzf
+# ---------
+if [[ ! "$PATH" == */usr/local/opt/fzf/bin* ]]; then
+    path=('/usr/local/opt/fzf/bin' $path)
+fi
+
+# fzf auto-completion
+[[ $- == *i* ]] && source "/usr/local/opt/fzf/shell/completion.zsh" 2> /dev/null
+
+# fzf key bindings
+source "/usr/local/opt/fzf/shell/key-bindings.zsh"
