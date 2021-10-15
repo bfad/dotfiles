@@ -1,0 +1,27 @@
+{
+	"auto_upgrade_last_run": null,
+	"bootstrapped": true,
+	"in_process_packages":
+	[
+	],
+	"installed_packages":
+	[
+		"Agila Theme",
+		"Better RSpec",
+		"Dockerfile Syntax Highlighting",
+		"FileIcons",
+		"GitSavvy",
+		"Haml",
+		"Material Theme",
+		"Package Control",
+		"PackageDev",
+		"ProductiveSnippetsRuby",
+		"Rails Latest Migration",
+		"SublimeLinter",
+		"Theme - Gravity",
+	],
+	"repositories":
+	[
+		"https://github.com/n1k0/SublimeHighlight/tree/python3"
+	],
+}

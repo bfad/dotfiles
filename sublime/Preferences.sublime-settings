@@ -1,0 +1,22 @@
+{
+	"color_scheme": "Packages/Material Theme/schemes/Material-Theme-Darker.tmTheme",
+	"ensure_newline_at_eof_on_save": true,
+	"font_face": "Inconsolata",
+	"font_size": 14,
+	"ignored_packages":
+	[
+		"Vintage",
+	],
+	"indent_guide_options":
+	[
+		"draw_normal",
+		"draw_active"
+	],
+	"show_encoding": true,
+	"show_line_endings": true,
+	"theme": "Default Dark.sublime-theme",
+	"translate_tabs_to_spaces": true,
+	"word_wrap": false,
+	"trim_trailing_white_space_on_save": "true", //not_on_caret
+	/*"ensure_newline_at_eof_on_save": true,*/
+}
