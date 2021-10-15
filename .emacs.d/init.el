@@ -213,7 +213,7 @@ automatically but projectile-find-file will still be called."
  '(cursor-type (quote bar))
  '(package-selected-packages
    (quote
-    (string-inflection yari slim-mode scss-mode rinari origami key-chord ido-vertical-mode fuzzy flx-ido company-web company-inf-ruby company-flx coffee-mode chruby auto-complete alchemist)))
+    (jest-test-mode jest hcl-mode terraform-mode string-inflection yari slim-mode scss-mode rinari origami key-chord ido-vertical-mode fuzzy flx-ido company-web company-inf-ruby company-flx coffee-mode chruby auto-complete alchemist)))
  '(safe-local-variable-values
    (quote
     ((eval when
