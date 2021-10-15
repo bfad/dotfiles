@@ -255,3 +255,7 @@ used in the \"kill-buffer-query-functions\" list for non-file-visiting.
           (rename-file filename new-name t)
           (set-visited-file-name new-name t t)))))))
 (global-set-key (kbd "C-x C-r")  'rename-file-and-buffer)
+
+
+;; Prevent this keyboard entry from killing all my split-screen windows
+(global-unset-key (kbd "ESC ESC ESC"))
