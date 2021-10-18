@@ -37,7 +37,8 @@ path=('/usr/local/bin' $path)
 fpath=($HOME/.zsh/func $fpath)
 typeset -U fpath
 
-EDITOR="$(which emacs) -nw --no-desktop"
+#EDITOR="$(which emacs) -nw --no-desktop"
+EDITOR="subl -w"
 
 
 ###############
