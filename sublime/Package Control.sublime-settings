@@ -8,6 +8,7 @@
 	[
 		"Agila Theme",
 		"Better RSpec",
+		"ChangeQuotes",
 		"Dockerfile Syntax Highlighting",
 		"FileIcons",
 		"GitSavvy",
@@ -18,6 +19,7 @@
 		"ProductiveSnippetsRuby",
 		"Rails Latest Migration",
 		"SublimeLinter",
+		"SublimeLinter-rubocop",
 		"Theme - Gravity",
 	],
 	"repositories":

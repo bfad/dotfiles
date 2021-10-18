@@ -1,0 +1,9 @@
+// SublimeLinter Settings - User
+{
+    "linters": {
+        "rubocop": {
+            "executable": "$packages/User/rubocop_wrapper.zsh"
+        }
+    },
+    "debug": false
+}
