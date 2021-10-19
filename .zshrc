@@ -141,11 +141,6 @@ source ~/.zshplugins/zsh-history-substring-search/zsh-history-substring-search.z
 bindkey '^[[A' history-substring-search-up
 bindkey '^[[B' history-substring-search-down
 
-source /usr/local/opt/chruby/share/chruby/chruby.sh
-#To enable auto-switching of Rubies specified by .ruby-version files
-source /usr/local/opt/chruby/share/chruby/auto.sh
-
-
 # Setup fzf
 # ---------
 if [[ ! "$PATH" == */usr/local/opt/fzf/bin* ]]; then
