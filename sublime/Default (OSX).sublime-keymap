@@ -58,4 +58,59 @@
         "args": {"by": "lines", "forward": false},
         "context": [{"key": "auto_complete_visible"}]
     },
+
+    // Use tab to re-indent a selction
+    {
+        "keys": ["tab"],
+        "command": "reindent",
+        "context": [
+            { "key": "selection_empty", "operator": "equal", "operand": false },
+            { "key": "has_next_field", "operator": "equal", "operand": false }
+        ]
+    },
+    {
+        "keys": ["tab"],
+        "command": "reindent",
+        "context": [
+            { "key": "selection_empty", "operator": "equal", "operand": true, "match_all": true },
+            { "key": "preceding_text", "operator": "regex_match", "operand": "^\\s*" }
+        ]
+    },
+
+    // Emacs ctrl-g cancel stuff. (copied some from escape)
+    // Clear out the default of GoTo Line
+    { "keys": ["ctrl+g"], "command": "" },
+    { "keys": ["ctrl+g"], "command": "single_selection", "context":
+        [
+            { "key": "num_selections", "operator": "not_equal", "operand": 1 }
+        ]
+    },
+    { "keys": ["ctrl+g"], "command": "hide_panel", "args": {"cancel": true},
+        "context":
+        [
+            { "key": "panel_visible", "operator": "equal", "operand": true }
+        ]
+    },
+    { "keys": ["ctrl+g"], "command": "hide_overlay", "context":
+        [
+            { "key": "overlay_visible", "operator": "equal", "operand": true },
+            { "key": "panel_has_focus", "operator": "equal", "operand": false }
+        ]
+    },
+    { "keys": ["ctrl+g"], "command": "hide_auto_complete", "context":
+        [
+            { "key": "auto_complete_visible", "operator": "equal", "operand": true }
+        ]
+    },
+    { "keys": ["ctrl+g"], "command": "hide_popup", "context":
+        [
+            { "key": "popup_visible", "operator": "equal", "operand": true }
+        ]
+    },
+
+    // Setup Gotos
+    { "keys": ["super+l"], "command": "show_overlay", "args": {"overlay": "goto", "text": ":"} },
+
+    { "keys": ["super+."], "command": "goto_definition" },
+    { "keys": ["super+shift+."], "command": "goto_definition", "args": {"side_by_side": true, "clear_to_right": true} },
 ]

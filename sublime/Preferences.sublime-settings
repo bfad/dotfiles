@@ -17,6 +17,5 @@
 	"theme": "Default Dark.sublime-theme",
 	"translate_tabs_to_spaces": true,
 	"word_wrap": false,
-	"trim_trailing_white_space_on_save": "true", //not_on_caret
-	/*"ensure_newline_at_eof_on_save": true,*/
+	"trim_trailing_white_space_on_save": "all", //not_on_caret
 }
