@@ -2,4 +2,13 @@
     "tab_size": 2,
     "translate_tabs_to_spaces": true,
     "word_separators": "./\\()\"'-:,.;<>~#%^&*|+=[]{}`~",
+    "extensions": [
+		"podspec",
+		"jbuilder",
+		"rabl",
+		"rb",
+		"rake",
+		"thor",
+		"simplecov"
+	],
 }
