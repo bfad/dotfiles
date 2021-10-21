@@ -3,6 +3,9 @@
     "linters": {
         "rubocop": {
             "executable": "$packages/User/rubocop_wrapper.zsh"
+        },
+        "hamllint": {
+            "executable": "$packages/User/haml_lint_wrapper.zsh"
         }
     },
     "debug": false
