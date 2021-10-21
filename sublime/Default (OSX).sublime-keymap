@@ -33,6 +33,17 @@
             "cells": [[0, 0, 1, 1], [1, 0, 2, 1]]
         }
     },
+
+    // Re-map initial key for the Tab Multi-Select split view stuff
+    { "keys": ["ctrl+j", "super+up"], "command": "unselect_others" },
+    { "keys": ["ctrl+j", "super+left"], "command": "unselect_to_left" },
+    { "keys": ["ctrl+j", "super+right"], "command": "unselect_to_right" },
+    { "keys": ["ctrl+j", "super+shift+left"], "command": "select_to_left" },
+    { "keys": ["ctrl+j", "super+shift+right"], "command": "select_to_right" },
+    { "keys": ["ctrl+j", "super+shift+["], "command": "focus_to_left" },
+    { "keys": ["ctrl+j", "super+shift+]"], "command": "focus_to_right" },
+
+    { "keys": ["super+ctrl+j"], "command": "join_lines" },
     
     // Change close tag to the same as TextMate
     { "keys": ["ctrl+shift+,"], "command": "insert_snippet", "args": { "name": "Packages/XML/long-tag.sublime-snippet" } },
@@ -43,7 +54,8 @@
     { "keys": ["ctrl+shift+u"], "command": "lower_case" },
 
     // Macros
-    { "keys": ["ctrl+r"], "command": "run_macro" },
+    { "keys": ["ctrl+r"], "command": "toggle_record_macro" },
+    { "keys": ["super+r"], "command": "run_macro" },
 
     // Auto-complete selection (from my Emacs config)
     {
@@ -113,4 +125,14 @@
 
     { "keys": ["super+."], "command": "goto_definition" },
     { "keys": ["super+shift+."], "command": "goto_definition", "args": {"side_by_side": true, "clear_to_right": true} },
+    { "keys": ["super+j"], "command": "show_overlay", "args": {"overlay": "goto", "text": "@"} },
+    { "keys": ["super+shift+j"], "command": "goto_symbol_in_project" },
+
+
+    //////////////
+    // Syntax-Specific
+    //////////////
+
+    // Change between test and implementation
+    { "keys": ["super+/"], "command": "rspec_toggle" }
 ]
