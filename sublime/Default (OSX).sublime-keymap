@@ -128,6 +128,9 @@
     { "keys": ["super+j"], "command": "show_overlay", "args": {"overlay": "goto", "text": "@"} },
     { "keys": ["super+shift+j"], "command": "goto_symbol_in_project" },
 
+    // Emacs-like key command to changing open buffers, but limited to window / project
+    { "keys": ["ctrl+x", "b"], "command": "tab_filter" },
+
 
     //////////////
     // Syntax-Specific

@@ -24,6 +24,7 @@
 		"SublimeLinter",
 		"SublimeLinter-haml-lint",
 		"SublimeLinter-rubocop",
+		"Tab Filter",
 		"Theme - Gravity",
 	],
 	"repositories":
