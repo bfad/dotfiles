@@ -111,5 +111,5 @@
     //////////////
 
     // Change between test and implementation
-    { "keys": ["super+/"], "command": "rspec_toggle" }
+    { "keys": ["ctrl+/"], "command": "rspec_toggle" }
 ]
