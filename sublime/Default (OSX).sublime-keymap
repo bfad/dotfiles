@@ -105,6 +105,10 @@
     // Emacs-like key command to changing open buffers, but limited to window / project
     { "keys": ["ctrl+x", "b"], "command": "tab_filter" },
 
+    // Emacs text movement
+    { "keys": ["alt+f"], "command": "move", "args": {"by": "word_ends", "forward": true} },
+    { "keys": ["alt+b"], "command": "move", "args": {"by": "words", "forward": false} },
+
 
     //////////////
     // Syntax-Specific
