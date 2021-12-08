@@ -31,7 +31,7 @@ setopt AUTO_PUSHD
 # PATH setup
 # This gets rid of the right-most duplicate entries
 typeset -U path
-path=('/usr/local/bin' $path)
+path=('/opt/homebrew/bin' '/usr/local/bin' $path)
 
 # Function Path Setup
 fpath=($HOME/.zsh/func $fpath)
@@ -155,12 +155,25 @@ bindkey '^[[B' history-substring-search-down
 
 # Setup fzf
 # ---------
-if [[ ! "$PATH" == */usr/local/opt/fzf/bin* ]]; then
-    path=('/usr/local/opt/fzf/bin' $path)
+if [ $(uname -p) = 'arm' ]; then
+    if [[ ! "$PATH" == */opt/homebrew/opt/fzf/bin* ]]; then
+        path=('/opt/homebrew/opt/fzf/bin' $path)
+    fi
+
+    # fzf auto-completion
+    [[ $- == *i* ]] && source "/opt/homebrew/opt/fzf/shell/completion.zsh" 2> /dev/null
+
+    # fzf key bindings
+    source "/opt/homebrew/opt/fzf/shell/key-bindings.zsh"
+
+else
+    if [[ ! "$PATH" == */usr/local/opt/fzf/bin* ]]; then
+        path=('/usr/local/opt/fzf/bin' $path)
+    fi
+
+    # fzf auto-completion
+    [[ $- == *i* ]] && source "/usr/local/opt/fzf/shell/completion.zsh" 2> /dev/null
+
+    # fzf key bindings
+    source "/usr/local/opt/fzf/shell/key-bindings.zsh"
 fi
-
-# fzf auto-completion
-[[ $- == *i* ]] && source "/usr/local/opt/fzf/shell/completion.zsh" 2> /dev/null
-
-# fzf key bindings
-source "/usr/local/opt/fzf/shell/key-bindings.zsh"
