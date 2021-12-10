@@ -1,0 +1,1 @@
+cd ~/code/rails_app
