@@ -1,6 +1,6 @@
 {
     "extensions":
     [
-        "html", "htm", "shtml", "xhtml", "phtml"
-    ]
+        "htm", "html", "shtml", "xhtml",
+    ],
 }
