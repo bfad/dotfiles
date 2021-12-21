@@ -28,19 +28,6 @@ setopt CORRECT
 # Make cd push the old directory onto the directory stack
 setopt AUTO_PUSHD
 
-# PATH setup
-# This gets rid of the right-most duplicate entries
-typeset -U path
-path=('/opt/homebrew/bin' '/usr/local/bin' $path)
-
-# Function Path Setup
-fpath=($HOME/.zsh/func $fpath)
-typeset -U fpath
-
-#EDITOR="$(which emacs) -nw --no-desktop"
-EDITOR="subl -w"
-
-
 ###############
 # Completions #
 ###############
@@ -124,16 +111,6 @@ if [[ "$TERM_PROGRAM" == "Apple_Terminal" ]]; then
 fi
 
 
-###########
-# Aliases #
-###########
-alias ls='ls -G -h -p '
-alias ll='ls -l -G -h -p '
-
-# Get setup-specific configuration if it exists
-if [[ -e ~/.zshlocal ]]; then; source ~/.zshlocal; fi;
-
-
 #################
 # ENV Variables #
 #################
@@ -177,3 +154,13 @@ else
     # fzf key bindings
     source "/usr/local/opt/fzf/shell/key-bindings.zsh"
 fi
+
+
+###########
+# Aliases #
+###########
+alias ls='ls -G -h -p '
+alias ll='ls -l -G -h -p '
+
+# Get setup-specific configuration if it exists
+if [[ -e ~/.zshrc-local ]]; then; source ~/.zshrc-local; fi;
