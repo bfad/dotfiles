@@ -1,13 +1,13 @@
 [branch]
-	autosetuprebase = always
+    autosetuprebase = always
 [core]
-	editor = subl -w
+    editor = subl -w
     #editor = emacs -nw --no-desktop --no-init-file --no-site-file --load ~/.emacs.d/init.git.el
     #editor = emacsclient -c
 
 [merge]
     tool = Kaleidoscope
-	conflictstyle = diff3
+    conflictstyle = diff3
 [diff]
     tool = Kaleidoscope
 [mergetoolergetool]
@@ -24,32 +24,28 @@
     s      = status -s
     tip    = log -n 1
     pushf  = push --force-with-lease
-	amend-to = git commit --fixup=$1 && GIT_SEQUENCE_EDITOR=true git rebase -i --autosquash $1^
+    amend-to = git commit --fixup=$1 && GIT_SEQUENCE_EDITOR=true git rebase -i --autosquash $1^
 
 [mergetool "Kaleidoscope"]
-	cmd = ksdiff --merge --output \"$MERGED\" --base \"$BASE\" -- \"$LOCAL\" --snapshot \"$REMOTE\" --snapshot
-	trustExitCode = true
+    cmd = ksdiff --merge --output \"$MERGED\" --base \"$BASE\" -- \"$LOCAL\" --snapshot \"$REMOTE\" --snapshot
+    trustExitCode = true
 [difftool "Kaleidoscope"]
     cmd = ksdiff --partial-changeset --relative-path \"$MERGED\" -- \"$LOCAL\" \"$REMOTE\"
-[difftool "sourcetree"]
-	cmd = /usr/local/bin/ksdiff -w \"$LOCAL\" \"$REMOTE\"
-	path = 
-[mergetool "sourcetree"]
-	cmd = /usr/local/bin/ksdiff --merge --output \"$MERGED\" --base \"$BASE\" -- \"$LOCAL\" --snapshot \"$REMOTE\" --snapshot
-	trustExitCode = true
+[difftool "bbedit"]
+    cmd = bbdiff --wait --resume $LOCAL $REMOTE
 [init]
-	defaultBranch = main
+    defaultBranch = main
 [pull]
-	rebase = true
+    rebase = true
 
 [include]
-	path = github_author.inc
+    path = github_author.inc
 
 [includeIf "gitdir:~/Documents/dotfiles/.git"]
-	path = github_author.inc
+    path = github_author.inc
 
 [includeIf "gitdir:~/code/open_source/"]
-	path = github_author.inc
+    path = github_author.inc
 
 [includeIf "gitdir:~/code/pe/"]
-	path = pe_author.inc
+    path = pe_author.inc
