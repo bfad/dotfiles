@@ -24,7 +24,7 @@
     s      = status -s
     tip    = log -n 1
     pushf  = push --force-with-lease
-    amend-to = git commit --fixup=$1 && GIT_SEQUENCE_EDITOR=true git rebase -i --autosquash $1^
+    amend-to = "!f() { git commit --fixup=$1 && GIT_SEQUENCE_EDITOR=true git rebase -i --autosquash $1^; }; f"
 
 [mergetool "Kaleidoscope"]
     cmd = ksdiff --merge --output \"$MERGED\" --base \"$BASE\" -- \"$LOCAL\" --snapshot \"$REMOTE\" --snapshot
