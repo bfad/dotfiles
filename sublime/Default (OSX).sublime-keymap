@@ -63,6 +63,15 @@
         ]
     },
 
+    // Use return to open up result of Find in Files
+    {
+        "keys": ["enter"],
+        "command": "double_click_at_caret",
+        "context": [
+            { "key": "selector", "operator": "equal", "operand": "text.find-in-files", "match_all": true },
+        ],
+    },
+
     // Emacs ctrl-g cancel stuff. (copied some from escape)
     // Clear out the default of GoTo Line
     { "keys": ["ctrl+g"], "command": "" },
