@@ -7,7 +7,7 @@
 
 [merge]
     tool = Kaleidoscope
-    conflictstyle = diff3
+    conflictStyle = zdiff3
 [diff]
     tool = Kaleidoscope
 [mergetoolergetool]
