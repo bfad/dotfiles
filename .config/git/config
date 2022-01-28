@@ -25,6 +25,7 @@
     tip    = log -n 1
     pushf  = push --force-with-lease
     amend-to = "!f() { git commit --fixup=$1 && GIT_SEQUENCE_EDITOR=true git rebase -i --autosquash $1^; }; f"
+    co-commit = "!f() { git log --pretty=format:\"%an <%ae>\" -2000 | sort | uniq | fzf -m | sed 's/.*/Co-authored-by: &/' | awk 'BEGIN{print \"\n\"}{print}' > /tmp/git.coauth && git commit -t /tmp/git.coauth }; f"
 
 [mergetool "Kaleidoscope"]
     cmd = ksdiff --merge --output \"$MERGED\" --base \"$BASE\" -- \"$LOCAL\" --snapshot \"$REMOTE\" --snapshot
