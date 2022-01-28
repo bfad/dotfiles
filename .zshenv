@@ -7,8 +7,12 @@ elif [ -f /usr/local/opt/chruby/share/chruby/chruby.sh ]; then
     source /usr/local/opt/chruby/share/chruby/auto.sh
 fi
 
-# PATH setup
-path=(/usr/local/bin /usr/local/sbin $path)
+###
+# I can't set `path` data in here because MacOS uses `/etc/zprofile` instead of
+# `/etc/zshenv` to set the default path. That gets called after this file, and
+# so it ends up prepending paths like `/bin` and `/usr/bin` to the front. Look
+# in `~/.zprofile` and `~/.zprofile-local` for setting the path.
+###
 
 # Function Path Setup
 fpath=($HOME/.zsh/func $fpath)
@@ -16,7 +20,7 @@ fpath=($HOME/.zsh/func $fpath)
 ####
 # Homebrew setup
 ###
-path=(/opt/homebrew/bin /opt/homebrew/sbin $path)
+# path configured in .zprofile
 manpath=(/opt/homebrew/share/man $manpath)
 infopath=(/opt/homebrew/share/info $infopath)
 HOMEBREW_PREFIX="/opt/homebrew"
