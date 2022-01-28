@@ -114,6 +114,9 @@ fi
 #################
 # ENV Variables #
 #################
+#EDITOR="$(which emacs) -nw --no-desktop"
+EDITOR="subl -w"
+
 # Enable iex shell history (Elixir REPL)
 export ERL_AFLAGS="-kernel shell_history enabled"
 
@@ -132,28 +135,16 @@ bindkey '^[[B' history-substring-search-down
 
 # Setup fzf
 # ---------
-if [ $(uname -p) = 'arm' ]; then
-    if [[ ! "$PATH" == */opt/homebrew/opt/fzf/bin* ]]; then
-        path=('/opt/homebrew/opt/fzf/bin' $path)
-    fi
+# Don't think I need this since fzf is linked to /opt/hombrew/bin
+# if [[ ! "$PATH" == */opt/homebrew/opt/fzf/bin* ]]; then
+#     path=('/opt/homebrew/opt/fzf/bin' $path)
+# fi
 
-    # fzf auto-completion
-    [[ $- == *i* ]] && source "/opt/homebrew/opt/fzf/shell/completion.zsh" 2> /dev/null
+# fzf auto-completion
+[[ $- == *i* ]] && source "/opt/homebrew/opt/fzf/shell/completion.zsh" 2> /dev/null
 
-    # fzf key bindings
-    source "/opt/homebrew/opt/fzf/shell/key-bindings.zsh"
-
-else
-    if [[ ! "$PATH" == */usr/local/opt/fzf/bin* ]]; then
-        path=('/usr/local/opt/fzf/bin' $path)
-    fi
-
-    # fzf auto-completion
-    [[ $- == *i* ]] && source "/usr/local/opt/fzf/shell/completion.zsh" 2> /dev/null
-
-    # fzf key bindings
-    source "/usr/local/opt/fzf/shell/key-bindings.zsh"
-fi
+# fzf key bindings
+source "/opt/homebrew/opt/fzf/shell/key-bindings.zsh"
 
 
 ###########
