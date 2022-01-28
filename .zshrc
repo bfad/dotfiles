@@ -153,5 +153,11 @@ source "/opt/homebrew/opt/fzf/shell/key-bindings.zsh"
 alias ls='ls -G -h -p '
 alias ll='ls -l -G -h -p '
 
+alias bi='bundle install'
+alias be='bundle exec'
+alias binit='bundle config set --local path 'vendor' && bundle install && echo "*" > .bundle/.gitignore && echo "*" > vendor/ruby/.gitignore'
+
+alias dc='docker compose'
+
 # Get setup-specific configuration if it exists
 if [[ -e ~/.zshrc-local ]]; then; source ~/.zshrc-local; fi;
