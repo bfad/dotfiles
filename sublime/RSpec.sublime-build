@@ -1,5 +1,5 @@
 {
-    "shell_cmd": "echo 'Switching Ruby...' && source /usr/local/opt/chruby/share/chruby/chruby.sh && source /usr/local/opt/chruby/share/chruby/auto.sh && echo 'Running bundle exec rspec --format documentation $file' && bundle exec rspec --format documentation $file",
+    "shell_cmd": "echo 'Switching Ruby...' && source /opt/homebrew/opt/chruby/share/chruby/chruby.sh && source /opt/homebrew/opt/chruby/share/chruby/auto.sh && echo 'Running bundle exec rspec --format documentation $file' && bundle exec rspec --format documentation $file",
     "file_regex": "^\\s+# (.*\\.+rb):([0-9]+):",
     "working_dir": "${project_path:${folder}}",
     "selector": "source.ruby.rspec"
