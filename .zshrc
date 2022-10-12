@@ -133,6 +133,9 @@ source ~/.zshplugins/zsh-history-substring-search/zsh-history-substring-search.z
 bindkey '^[[A' history-substring-search-up
 bindkey '^[[B' history-substring-search-down
 
+# Override default prompt set above
+eval "$(starship init zsh)"
+
 # Setup fzf
 # ---------
 # Don't think I need this since fzf is linked to /opt/hombrew/bin

@@ -1,0 +1,130 @@
+# Get editor completions based on the config schema
+"$schema" = 'https://starship.rs/config-schema.json'
+
+add_newline = false
+continuation_prompt = "[❯](white) "
+
+format = """
+$directory\
+$line_break\
+$custom\
+$username\
+$character"""
+
+[directory]
+truncate_to_repo = false
+truncation_length = 0
+format = "[$read_only]($read_only_style)[$path]($style) "
+style = "blue"
+
+# Used "custom" module for finer-grain controll
+# [git_branch]
+# style = "yellow"
+# format = "\\[[$repo_root$branch(:$remote_branch)]($style)\\]"
+
+# [git_commit]
+# tag_disabled = false
+# format = "\\[[$hash$tag]($style)\\]"
+# style = "yellow"
+
+# [git_state]
+# style = "cyan"
+
+# [git_status]
+# format = "[$conflicted[$staged](bold green)$modified$deleted$untracked]($style)"
+# conflicted = "U"
+# staged = "M"
+# modified = "M"
+# deleted = "D"
+# untracked = "?"
+
+[username]
+format = " [$user]($style)"
+
+[custom.repo_basename]
+command = "basename $(git rev-parse --show-toplevel)"
+when = "git rev-parse --show-toplevel"
+format = "[$symbol$output]($style)"
+style = "purple"
+symbol = ""
+
+[custom.repo_branch_or_tag_or_commit]
+command = """
+() {
+  local remote=$(git rev-parse --abbrev-ref --symbolic-full-name @{push} 2> /dev/null)
+  local branch=$(git symbolic-ref --short -q HEAD)
+  if [[ -n $branch ]] && [[ -n $remote ]] && [[ $remote != */$branch ]] then
+    local branch="$branch($remote)"
+  fi
+  [[ -n $branch ]] && echo -n $branch && return
+
+  local tag=$(git describe --tags --exact-match 2> /dev/null)
+  [[ -n $tag ]] && echo -n "tags:$tag" && return
+
+  echo -n $(git rev-parse --short HEAD)
+}
+"""
+when = "git rev-parse --show-toplevel"
+format = "\\[[$output]($style)\\]"
+style = "yellow"
+
+[custom.repo_state]
+command = """
+() {
+  # From https://docs.rs/git-repository/latest/src/git_repository/repository/state.rs.html
+  # And https://github.com/magicmonty/bash-git-prompt/blob/master/gitstatus.sh
+  [[ -e $(git rev-parse --git-path "rebase-apply/applying") ]] && echo -n "AM" && return
+
+  if [[ -e $(git rev-parse --git-path "rebase-apply/rebasing") ]] ||
+  [[ -e $(git rev-parse --git-path "rebase-merge/interactive") ]] ||
+  [[ -e $(git rev-parse --git-path "rebase-merge") ]]
+  then
+    __git_prompt_read () {
+      local f="${1}"
+      shift
+      [[ -r "${f}" ]] && read -r "${@}" <"${f}"
+    }
+    local step=""
+    local total=""
+
+    __git_prompt_read $(git rev-parse --git-path "rebase-merge/msgnum") step
+    [[ -n $step ]] || __git_prompt_read $(git rev-parse --git-path "rebase-apply/next") step
+    __git_prompt_read $(git rev-parse --git-path "rebase-merge/end") total
+    [[ -n $total ]] || __git_prompt_read $(git rev-parse --git-path "rebase-apply/last") total
+
+    if [[ -n "${step}" ]] && [[ -n "${total}" ]]; then
+      echo -n "REBASING $step/$total"
+    else
+      echo -n "REBASING"
+    fi
+    return
+  fi
+
+  [[ -e $(git rev-parse --git-path "rebase-apply") ]] && echo -n "AM/REBASING" && return
+  [[ -e $(git rev-parse --git-path "CHERRY_PICK_HEAD") ]] && echo -n "CHERRY-PICKING" && return
+  [[ -e $(git rev-parse --git-path "MERGE_HEAD") ]] && echo -n "MERGING" && return
+  [[ -e $(git rev-parse --git-path "BISECT_LOG") ]] && echo -n "BISECTING" && return
+  [[ -e $(git rev-parse --git-path "REVERT_HEAD") ]] && echo -n "REVERTING" && return
+}
+"""
+when = "git rev-parse --show-toplevel"
+format = "[(\\($output\\))]($style)"
+style = "cyan"
+
+[custom.repo_working_status]
+command = """
+() {
+  local git_status=$(git status --porcelain)
+  local display=""
+
+  [[ -n $(echo -n $git_status | grep -m 1 -E '^(?:[MTRC][MTD ]|[A][^A]|[D][^D])') ]] && local display="$display📗"
+  [[ -n $(echo -n $git_status | grep -m 1 -E '^(?:[ MTARC][MTD]| [ARC])') ]] && local display="$display📕"
+  [[ -n $(echo -n $git_status | grep -m 1 '^??') ]] && local display="$display❓"
+  [[ -n $(echo -n $git_status | grep -m 1 -E '^(?:U|.U|DD|AA)') ]] && local display="$display🚫"
+
+  echo -n $display
+}
+"""
+when = "git rev-parse --show-toplevel"
+format = "[$output]($style)"
+style = "bold"
