@@ -11,8 +11,6 @@ $custom\
 $username\
 $character"""
 
-[character]
-format = " $symbol "
 
 [directory]
 truncate_to_repo = false
@@ -42,13 +40,13 @@ style = "blue"
 # untracked = "?"
 
 [username]
-format = " [$user]($style)"
+format = "[$user]($style)"
 
 [custom.repo_basename]
 command = "basename $(git rev-parse --show-toplevel)"
 when = "git rev-parse --show-toplevel"
 format = "[$symbol$output]($style)"
-style = "purple inverted"
+style = "cyan inverted"
 symbol = " "
 
 [custom.repo_branch_or_tag_or_commit]
@@ -68,8 +66,8 @@ command = """
 }
 """
 when = "git rev-parse --show-toplevel"
-format = "[](yellow bg:purple)[$output]($style)[](yellow)"
-style = "yellow inverted"
+format = "[](green bg:cyan)[$output]($style)[](green)"
+style = "green inverted"
 
 [custom.repo_state]
 command = """
@@ -111,8 +109,8 @@ command = """
 }
 """
 when = "git rev-parse --show-toplevel"
-format = "[([](cyan)$output[](cyan))]($style)"
-style = "cyan inverted"
+format = "[([](yellow)$output[](yellow))]($style)"
+style = "yellow inverted"
 
 [custom.repo_working_status]
 command = """
@@ -120,13 +118,13 @@ command = """
   local git_status=$(git status --porcelain)
   local display=""
 
-  [[ -n $(echo -n $git_status | grep -m 1 -E '^(?:[MTRC][MTD ]|[A][^A]|[D][^D])') ]] && local display="$display📗"
-  [[ -n $(echo -n $git_status | grep -m 1 -E '^(?:[ MTARC][MTD]| [ARC])') ]] && local display="$display📕"
-  [[ -n $(echo -n $git_status | grep -m 1 '^??') ]] && local display="$display❓"
-  [[ -n $(echo -n $git_status | grep -m 1 -E '^(?:U|.U|DD|AA)') ]] && local display="$display🚫"
+  [[ -n $(echo -n $git_status | grep -m 1 -E '^(?:[MTRC][MTD ]|[A][^A]|[D][^D])') ]] && local display="${display}📗"
+  [[ -n $(echo -n $git_status | grep -m 1 -E '^(?:[ MTARC][MTD]| [ARC])') ]] && local display="${display}📕"
+  [[ -n $(echo -n $git_status | grep -m 1 '^??') ]] && local display="${display}❓"
+  [[ -n $(echo -n $git_status | grep -m 1 -E '^(?:U|.U|DD|AA)') ]] && local display="${display}🚫"
 
   echo -n $display
 }
 """
 when = "git rev-parse --show-toplevel"
-format = "[([](bright-black)$output[](bright-black))]($style)"
+format = "[([](bright-red)$output[](bright-red)) ]($style)"
