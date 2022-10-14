@@ -5,12 +5,18 @@
 continuation_prompt = "[❯](white) "
 
 format = """
+$cmd_duration\
 $directory\
 $line_break\
 $custom\
 $username\
+$shlvl\
+$jobs\
 $character"""
 
+[cmd_duration]
+format = "[](bright-black)[⏱  $duration\n]($style)"
+style = "bold bright-purple"
 
 [directory]
 truncate_to_repo = false
@@ -18,29 +24,15 @@ truncation_length = 0
 format = "[$path]($style)[$read_only]($read_only_style)"
 style = "blue"
 
-# Used "custom" module for finer-grain controll
-# [git_branch]
-# style = "yellow"
-# format = "\\[[$repo_root$branch(:$remote_branch)]($style)\\]"
-
-# [git_commit]
-# tag_disabled = false
-# format = "\\[[$hash$tag]($style)\\]"
-# style = "yellow"
-
-# [git_state]
-# style = "cyan"
-
-# [git_status]
-# format = "[$conflicted[$staged](bold green)$modified$deleted$untracked]($style)"
-# conflicted = "U"
-# staged = "M"
-# modified = "M"
-# deleted = "D"
-# untracked = "?"
-
 [username]
 format = "[$user]($style)"
+
+[shlvl]
+disabled = false
+format = "[$symbol]($style)"
+
+[jobs]
+symbol = ""
 
 [custom.repo_basename]
 command = "basename $(git rev-parse --show-toplevel)"
