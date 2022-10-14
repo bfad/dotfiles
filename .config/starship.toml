@@ -1,7 +1,7 @@
 # Get editor completions based on the config schema
 "$schema" = 'https://starship.rs/config-schema.json'
 
-add_newline = false
+#add_newline = false
 continuation_prompt = "[❯](white) "
 
 format = """
@@ -11,10 +11,13 @@ $custom\
 $username\
 $character"""
 
+[character]
+format = " $symbol "
+
 [directory]
 truncate_to_repo = false
 truncation_length = 0
-format = "[$read_only]($read_only_style)[$path]($style) "
+format = "[$path]($style)[$read_only]($read_only_style)"
 style = "blue"
 
 # Used "custom" module for finer-grain controll
@@ -45,8 +48,8 @@ format = " [$user]($style)"
 command = "basename $(git rev-parse --show-toplevel)"
 when = "git rev-parse --show-toplevel"
 format = "[$symbol$output]($style)"
-style = "purple"
-symbol = ""
+style = "purple inverted"
+symbol = " "
 
 [custom.repo_branch_or_tag_or_commit]
 command = """
@@ -65,8 +68,8 @@ command = """
 }
 """
 when = "git rev-parse --show-toplevel"
-format = "\\[[$output]($style)\\]"
-style = "yellow"
+format = "[](yellow bg:purple)[$output]($style)[](yellow)"
+style = "yellow inverted"
 
 [custom.repo_state]
 command = """
@@ -108,8 +111,8 @@ command = """
 }
 """
 when = "git rev-parse --show-toplevel"
-format = "[(\\($output\\))]($style)"
-style = "cyan"
+format = "[([](cyan)$output[](cyan))]($style)"
+style = "cyan inverted"
 
 [custom.repo_working_status]
 command = """
@@ -126,5 +129,4 @@ command = """
 }
 """
 when = "git rev-parse --show-toplevel"
-format = "[$output]($style)"
-style = "bold"
+format = "[([](bright-black)$output[](bright-black))]($style)"
