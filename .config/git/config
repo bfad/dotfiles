@@ -5,12 +5,14 @@
     #editor = emacs -nw --no-desktop --no-init-file --no-site-file --load ~/.emacs.d/init.git.el
     #editor = emacsclient -c
 
+[blame]
+    ignoreRevsFile = .git-blame-ignore-revs
 [merge]
     tool = Kaleidoscope
     conflictStyle = zdiff3
 [diff]
     tool = Kaleidoscope
-[mergetoolergetool]
+[mergetool]
     keepBackup = true
 [alias]
     a      = add .
