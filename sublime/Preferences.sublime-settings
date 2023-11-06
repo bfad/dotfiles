@@ -19,4 +19,5 @@
 	"translate_tabs_to_spaces": true,
 	"word_wrap": false,
 	"trim_trailing_white_space_on_save": "all", //not_on_caret
+	"scroll_past_end": 0.8,
 }
