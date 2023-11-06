@@ -118,6 +118,9 @@
     { "keys": ["alt+f"], "command": "move", "args": {"by": "word_ends", "forward": true} },
     { "keys": ["alt+b"], "command": "move", "args": {"by": "words", "forward": false} },
 
+    // Dash Documentation
+    { "keys": ["ctrl+h"], "command": "dash_doc" },
+
 
     //////////////
     // Syntax-Specific
