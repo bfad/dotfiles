@@ -39,7 +39,7 @@ command = "basename $(git rev-parse --show-toplevel)"
 when = "git rev-parse --show-toplevel"
 format = "[$symbol$output]($style)"
 style = "cyan inverted"
-symbol = " "
+symbol = "שׂ "
 
 [custom.repo_branch_or_tag_or_commit]
 command = """
