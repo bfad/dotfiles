@@ -1,3 +1,6 @@
+# Disable Apple's shell session history stuff that prevents us from looking up the history
+SHELL_SESSIONS_DISABLE=1
+
 # If chruby is installed, let's use it
 if [ -f /opt/homebrew/opt/chruby/share/chruby/chruby.sh ]; then
     source /opt/homebrew/opt/chruby/share/chruby/chruby.sh

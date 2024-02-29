@@ -1,11 +1,12 @@
 ##################
 # History Config #
 ##################
-HISTSIZE=10000
-SAVEHIST=10000
+HISTSIZE=55000
+SAVEHIST=50000
 HISTFILE=~/.zhistory
 
-# Append to history file (don't over-write)
+# https://zsh.sourceforge.io/Doc/Release/Options.html#History
+# Append to history file (don't over-write) after shell exits
 # Ignore a command if it duplicates the previous command
 # Expire duplicate history lines first
 # Don't store 'history' or 'fc' commands
@@ -56,18 +57,21 @@ precmd () {
     vcs_info
 }
 
-# creating an unique session id for each terminal session
-__shhist_session="${RANDOM}"
+# If ShellHistory is installed, this configures using it
+if [ -f /Applications/ShellHistory.app/Contents/Helpers/shhist ]; then
+  # creating an unique session id for each terminal session
+  __shhist_session="${RANDOM}"
 
-# prompt function to record the history
-__shhist_prompt() {
-    local __exit_code="${?:-1}"
-    history -D -t "%s" -1 | sudo --preserve-env --user ${SUDO_USER:-${LOGNAME}} /Applications/ShellHistory.app/Contents/Helpers/shhist insert --session ${TERM_SESSION_ID:-${__shhist_session}} --username ${LOGNAME} --hostname $(hostname) --exit-code ${__exit_code}
-    return ${__exit_code}
-}
+  # prompt function to record the history
+  __shhist_prompt() {
+      local __exit_code="${?:-1}"
+      history -D -t "%s" -1 | sudo --preserve-env --user ${SUDO_USER:-${LOGNAME}} /Applications/ShellHistory.app/Contents/Helpers/shhist insert --session ${TERM_SESSION_ID:-${__shhist_session}} --username ${LOGNAME} --hostname $(hostname) --exit-code ${__exit_code}
+      return ${__exit_code}
+  }
 
-# integrating prompt function in prompt
-precmd_functions=(__shhist_prompt $precmd_functions)
+  # integrating prompt function in prompt
+  precmd_functions=(__shhist_prompt $precmd_functions)
+fi
 
 ###########
 # Prompts #
