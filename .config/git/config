@@ -50,5 +50,8 @@
 [includeIf "gitdir:~/code/open_source/"]
     path = github_author.inc
 
-[includeIf "gitdir:~/code/pe/"]
-    path = pe_author.inc
+[includeIf "gitdir:~/src/code/"]
+    path = github_author.inc
+
+[includeIf "gitdir:~/src/github.com/Shopify/"]
+    path = work_author.inc
