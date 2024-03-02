@@ -14,6 +14,14 @@ if [ -d "$HOME/Library/Application Support/Sublime Text" ]; then
     ln -sf "$from_path/sublime" "$HOME/Library/Application Support/Sublime Text/User"
 fi
 
+# Only link the vscode files if the MacOS application is installed
+if [ -d "$HOME/Library/Application Support/Code" ]; then
+    # ln -sf "$from_path/vscode/extensions.json" "$HOME/.vscode/extensions/"
+    ln -sf "$from_path/vscode/snippets/" "$HOME/Library/Application Support/Code/User/"
+    ln -sf "$from_path/vscode/settings.json" "$HOME/Library/Application Support/Code/User/"
+    ln -sf "$from_path/vscode/keybindings.json" "$HOME/Library/Application Support/Code/User/"
+fi
+
 # Symlink each file
 ln -sf "$from_path/.emacs.d" ~/
 # I haven't used tmux in a while, and I think some of the config options no longer apply.

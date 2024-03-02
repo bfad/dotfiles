@@ -1,0 +1,77 @@
+{
+    "editor.fontFamily": "Inconsolata",
+    "editor.autoClosingDelete": "always",
+    "editor.fontSize": 14,
+    "remote.SSH.connectTimeout": 150,
+    "[ruby]": {
+        "editor.defaultFormatter": "Shopify.ruby-lsp",
+        "editor.formatOnType": true,
+        "editor.tabSize": 2,
+        "editor.insertSpaces": true,
+        "files.trimTrailingWhitespace": true,
+        "files.insertFinalNewline": true,
+        "files.trimFinalNewlines": true,
+        "editor.rulers": [
+            120
+        ],
+        "editor.semanticHighlighting.enabled": true,
+        "editor.formatOnSave": false
+    },
+    "files.autoSave": "onFocusChange",
+    "diffEditor.maxComputationTime": 0,
+    "workbench.colorTheme": "My Material Darker",
+    "workbench.colorCustomizations": {
+        "[Material Theme Ocean High Contrast]": {}
+    },
+    "editor.tokenColorCustomizations": {
+        "[*Material*]": {
+            "textMateRules": [
+                {
+                    "scope": "comment, comment punctuation.definition.comment",
+                    "settings": {
+                        "foreground": "#E3BC9A"
+                    }
+                },
+            ]
+        },
+    },
+    "workbench.iconTheme": "eq-material-theme-icons-darker",
+    "window.density.editorTabHeight": "compact",
+    "[git-commit]": {
+        "editor.rulers": [
+            50,
+            72
+        ],
+        "editor.wordWrap": "off",
+        "workbench.editor.restoreViewState": false,
+        "rewrap.autoWrap.enabled": true,
+        "rewrap.wrappingColumn": 72,
+    },
+    "gitlens.hovers.currentLine.over": "line",
+    "gitlens.codeLens.enabled": false,
+    "gitlens.currentLine.enabled": false,
+    "diffEditor.renderSideBySide": false,
+    "editor.lineHeight": 1.2,
+    "[erb]": {
+        "editor.tabSize": 2,
+        "editor.insertSpaces": true,
+        "files.trimTrailingWhitespace": true,
+        "files.insertFinalNewline": true,
+        "files.trimFinalNewlines": true,
+    },
+    "github.copilot.editor.enableAutoCompletions": true,
+    "gitlens.rebaseEditor.ordering": "asc",
+    "shopifyGlobal.mysqlEditor": "external",
+    "editor.minimap.enabled": false,
+    "github.copilot.enable": {
+        "*": false,
+        "plaintext": false,
+        "markdown": false,
+        "scminput": false,
+        "ruby": true
+    },
+    "githubPullRequests.pullBranch": "never",
+    "cSpell.enabledFileTypes": {
+        "*": false
+    },
+}
