@@ -2,7 +2,7 @@
 ;; installed packages.  Don't delete this line.  If you don't want it,
 ;; just comment it out by adding a semicolon to the start of the line.
 ;; You may delete these explanatory comments.
-(package-initialize)
+;; Getting a warning that this is no longer necessary (package-initialize)
 
 ;; Start with adding packages
 (load "~/.emacs.d/init/packages")

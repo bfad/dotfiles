@@ -23,7 +23,7 @@
  'material_darker
  ;; basic theming.
 
- '(default ((t (:foreground "#eeffffff" :background "#212121" ))))
+ '(default ((t (:foreground "#eeffff" :background "#212121" ))))
  '(region  ((t (:background "#505050"))))
  '(cursor  ((t (:background "#FFCC00"))))
 
