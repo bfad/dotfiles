@@ -110,10 +110,10 @@ command = """
   local git_status=$(git status --porcelain)
   local display=""
 
-  [[ -n $(echo -n $git_status | grep -m 1 -E '^(?:[MTRC][MTD ]|[A][^A]|[D][^D])') ]] && local display="${display}📗"
-  [[ -n $(echo -n $git_status | grep -m 1 -E '^(?:[ MTARC][MTD]| [ARC])') ]] && local display="${display}📕"
+  [[ -n $(echo -n $git_status | grep -m 1 -E '^([MTRC][MTD ]|[A][^A]|[D][^D])') ]] && local display="${display}📗"
+  [[ -n $(echo -n $git_status | grep -m 1 -E '^([ MTARC][MTD]| [ARC])') ]] && local display="${display}📕"
   [[ -n $(echo -n $git_status | grep -m 1 '^??') ]] && local display="${display}❓"
-  [[ -n $(echo -n $git_status | grep -m 1 -E '^(?:U|.U|DD|AA)') ]] && local display="${display}🚫"
+  [[ -n $(echo -n $git_status | grep -m 1 -E '^(U|.U|DD|AA)') ]] && local display="${display}🚫"
 
   echo -n $display
 }
