@@ -142,16 +142,16 @@ eval "$(starship init zsh)"
 
 # Setup fzf
 # ---------
-# Don't think I need this since fzf is linked to /opt/hombrew/bin
-# if [[ ! "$PATH" == */opt/homebrew/opt/fzf/bin* ]]; then
-#     path=('/opt/homebrew/opt/fzf/bin' $path)
-# fi
 
-# fzf auto-completion
-[[ $- == *i* ]] && source "/opt/homebrew/opt/fzf/shell/completion.zsh" 2> /dev/null
+if [ -d /opt/homebrew/opt/fzf/shell/ ]; then
+  # fzf auto-completion
+  [[ $- == *i* ]] && source "/opt/homebrew/opt/fzf/shell/completion.zsh" 2> /dev/null
 
-# fzf key bindings
-source "/opt/homebrew/opt/fzf/shell/key-bindings.zsh"
+  # fzf key bindings
+  source "/opt/homebrew/opt/fzf/shell/key-bindings.zsh"
+fi
+
+
 
 
 ###########
