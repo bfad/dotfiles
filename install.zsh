@@ -11,7 +11,7 @@ ln -sf "$from_path/.config/"* ~/.config/
 
 # Only link the sublime folder if the file folder exists
 if [ -d "$HOME/Library/Application Support/Sublime Text" ]; then
-    ln -sf "$from_path/.sublime" "$HOME/Library/Application Support/Sublime Text/User"
+    ln -sf "$from_path/sublime" "$HOME/Library/Application Support/Sublime Text/User"
 fi
 
 # Symlink each file
