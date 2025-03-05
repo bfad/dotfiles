@@ -1,0 +1,8 @@
+# Introduced in Ruby 3.3.0
+if defined?(Reline::Face)
+  Reline::Face.config(:completion_dialog) do |conf|
+    conf.define :default, foreground: :white, background: :black
+    conf.define :enhanced, foreground: :black, background: :bright_green, style: :bold
+    conf.define :scrollbar, foreground: :magenta, background: :white
+  end
+end
