@@ -20,6 +20,7 @@
 		"Haml",
 		"LSP",
 		"LSP-metals",
+		"LSP-SourceKit",
 		"LSP-tailwindcss",
 		"Material Theme",
 		"nginx",
