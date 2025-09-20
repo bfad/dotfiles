@@ -257,5 +257,38 @@
         "key": "cmd+l",
         "command": "-extension.runLineOnRspec",
         "when": "editorLangId == 'ruby'"
+    },
+    {
+        "key": "ctrl+backspace",
+        "command": "-deleteLeft",
+        "when": "textInputFocus"
+    },
+    {
+        "key": "ctrl+backspace",
+        "command": "deleteWordPartLeft",
+        "when": "textInputFocus && !editorReadonly"
+    },
+    {
+        "key": "ctrl+alt+backspace",
+        "command": "-deleteWordPartLeft",
+        "when": "textInputFocus && !editorReadonly"
+    },
+    {
+        "key": "cmd+i",
+        "command": "composerMode.agent"
+    },
+    {
+        "key": "cmd+k cmd+d",
+        "command": "editor.action.moveSelectionToNextFindMatch",
+        "when": "editorFocus"
+    },
+    {
+        "key": "cmd+r cmd+d",
+        "command": "-editor.action.moveSelectionToNextFindMatch",
+        "when": "editorFocus"
+    },
+    {
+        "key": "cmd+e",
+        "command": "composerMode.background"
     }
 ]

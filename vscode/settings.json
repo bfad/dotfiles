@@ -77,8 +77,21 @@
     "[slim]": {
         "editor.tabSize": 2
     },
-    "github.copilot.nextEditSuggestions.enabled": true,
-    "settingsSync.ignoredSettings": [
-        
+    "chat.agent.enabled": true,
+    "chat.mcp.discovery.enabled": {
+        "claude-desktop": true,
+        "windsurf": true,
+        "cursor-global": true,
+        "cursor-workspace": true
+    },
+    "github.copilot.chat.codeGeneration.instructions": [
+        {"file": "instructions/general.instructions.md"}
     ],
+    "git.openRepositoryInParentFolders": "always",
+    "rubyLsp.rubyVersionManager": {
+        "identifier": "chruby"
+    },
+    "github.copilot.nextEditSuggestions.enabled": true,
+    "chat.mcp.serverSampling": {},
+    "window.openFoldersInNewWindow": "on",
 }
