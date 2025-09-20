@@ -237,5 +237,25 @@
         "key": "escape",
         "command": "removeSecondaryCursors",
         "when": "editorHasMultipleSelections && textInputFocus"
+    },
+    {
+        "key": "cmd+b",
+        "command": "extension.runFileOnRspec",
+        "when": "editorLangId == 'ruby'"
+    },
+    {
+        "key": "alt+cmd+l",
+        "command": "-extension.runFileOnRspec",
+        "when": "editorLangId == 'ruby'"
+    },
+    {
+        "key": "alt+cmd+b",
+        "command": "extension.runLineOnRspec",
+        "when": "editorLangId == 'ruby'"
+    },
+    {
+        "key": "cmd+l",
+        "command": "-extension.runLineOnRspec",
+        "when": "editorLangId == 'ruby'"
     }
 ]

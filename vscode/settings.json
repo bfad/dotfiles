@@ -64,7 +64,7 @@
     "shopifyGlobal.mysqlEditor": "external",
     "editor.minimap.enabled": false,
     "github.copilot.enable": {
-        "*": false,
+        "*": true,
         "plaintext": false,
         "markdown": false,
         "scminput": false,
@@ -74,4 +74,11 @@
     "cSpell.enabledFileTypes": {
         "*": false
     },
+    "[slim]": {
+        "editor.tabSize": 2
+    },
+    "github.copilot.nextEditSuggestions.enabled": true,
+    "settingsSync.ignoredSettings": [
+        
+    ],
 }
