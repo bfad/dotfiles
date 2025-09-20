@@ -55,3 +55,6 @@
 
 [includeIf "gitdir:~/src/github.com/Shopify/"]
     path = work_author.inc
+
+[includeIf "gitdir:~/world/"]
+    path = work_author.inc
