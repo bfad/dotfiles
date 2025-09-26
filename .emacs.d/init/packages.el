@@ -10,7 +10,7 @@
                     'git-commit
                     'multiple-cursors
                     'visual-fill-column
-                    'origami
+                    ; SEEMS TO BE BROKEN 'origami
                     'key-chord
                     'projectile
                     ;'flx-ido

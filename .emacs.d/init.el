@@ -141,8 +141,8 @@
 
 
 ;; Configure Origami for code folding
-(require 'origami)
-(global-origami-mode)
+;(require 'origami)
+;(global-origami-mode)
 
 ;; Configure neotree
 (require 'neotree)
@@ -210,16 +210,8 @@ automatically but projectile-find-file will still be called."
  ;; If there is more than one, they won't work right.
  '(ansi-color-names-vector
    ["black" "red3" "green3" "yellow3" "blue2" "magenta3" "cyan3" "gray90"])
- '(cursor-type (quote bar))
- '(package-selected-packages
-   (quote
-    (jest-test-mode jest hcl-mode terraform-mode string-inflection yari slim-mode scss-mode rinari origami key-chord ido-vertical-mode fuzzy flx-ido company-web company-inf-ruby company-flx coffee-mode chruby auto-complete alchemist)))
- '(safe-local-variable-values
-   (quote
-    ((eval when
-           (fboundp
-            (quote rainbow-mode))
-           (rainbow-mode 1))))))
+ '(cursor-type 'bar)
+ '(safe-local-variable-values '((eval when (fboundp 'rainbow-mode) (rainbow-mode 1)))))
 
 ;; Configure css-mode
 ;; TODO: Check this works with scss and sass
