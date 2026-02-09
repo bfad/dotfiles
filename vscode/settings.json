@@ -94,4 +94,10 @@
     "github.copilot.nextEditSuggestions.enabled": true,
     "chat.mcp.serverSampling": {},
     "window.openFoldersInNewWindow": "on",
+    "githubPullRequests.commentExpandState": "collapseAll",
+    "gitlens.ai.enabled": false,
+    "gitlens.ai.model": "vscode",
+    "gitlens.ai.vscode.model": "copilot:gpt-4.1",
+    "gitlens.rebaseEditor.openOnPausedRebase": false,
+    "chat.viewSessions.orientation": "stacked",
 }
