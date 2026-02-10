@@ -286,9 +286,5 @@
         "key": "cmd+r cmd+d",
         "command": "-editor.action.moveSelectionToNextFindMatch",
         "when": "editorFocus"
-    },
-    {
-        "key": "cmd+e",
-        "command": "composerMode.background"
     }
 ]
