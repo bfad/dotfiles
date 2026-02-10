@@ -3,12 +3,12 @@
     "translate_tabs_to_spaces": true,
     "word_separators": "./\\()\"'-:,.;<>~#%^&*|+=[]{}`~",
     "extensions": [
-        "podspec",
-        "rake",
-        "jbuilder",
         "thor",
-        "rb",
-        "rabl",
         "simplecov",
+        "rake",
+        "podspec",
+        "rb",
+        "jbuilder",
+        "rabl",
     ],
 }

@@ -18,6 +18,7 @@
 		"FileIcons",
 		"GitSavvy",
 		"Haml",
+		"Liquid",
 		"LSP",
 		"LSP-metals",
 		"LSP-SourceKit",
