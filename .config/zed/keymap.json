@@ -1,0 +1,26 @@
+[
+  {
+    "context": "Workspace",
+    "bindings": {
+      "cmd-shift-j": "project_symbols::Toggle"
+    }
+  },
+  {
+    "context": "Workspace",
+    "bindings": {
+      "cmd-t": "file_finder::Toggle"
+    }
+  },
+  {
+    "context": "Editor",
+    "bindings": {
+      "cmd-.": "editor::GoToDefinition"
+    }
+  },
+  {
+    "context": "Editor",
+    "bindings": {
+      "f12": "editor::ToggleCodeActions"
+    }
+  }
+]
