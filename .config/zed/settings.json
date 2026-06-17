@@ -7,23 +7,81 @@
 // custom settings, run the `open default settings` command
 // from the command palette or from `Zed` application menu.
 {
+  "diff_view_style": "unified",
+  "cli_default_open_behavior": "new_window",
+  "outline_panel": {
+    "dock": "left"
+  },
+  "collaboration_panel": {
+    "dock": "right"
+  },
+  "agent_servers": {
+    "github-copilot-cli": {
+      "type": "registry"
+    },
+    "codex-acp": {
+      "type": "registry"
+    },
+    "claude-acp": {
+      "type": "registry"
+    },
+    "pi-acp": {
+      "type": "registry"
+    }
+  },
+  "tabs": {
+    "show_close_button": "always",
+    "activate_on_close": "left_neighbour",
+    "close_position": "left",
+    "file_icons": true,
+    "git_status": true
+  },
   "icon_theme": "Colored Zed Icons Theme Dark",
   "buffer_line_height": "standard",
   "git_panel": {
-    "tree_view": false
+    "sort_by_path": false,
+    "dock": "left",
+    "tree_view": true
   },
   "edit_predictions": {
     "provider": "copilot"
   },
   "languages": {
+    "JavaScript": {
+      "tab_size": 2
+    },
     "Ruby": {
-      "language_servers": ["ruby-lsp", "!solargraph", "rubocop"],
+      "language_servers": ["ruby-lsp", "rubocop", "!solargraph"],
       "colorize_brackets": true,
       "tab_size": 2
     }
   },
   "base_keymap": "SublimeText",
+  "project_panel": {
+    "dock": "left",
+    "entry_spacing": "standard",
+  },
   "agent": {
+    "sidebar_side": "right",
+    "dock": "right",
+    "tool_permissions": {
+      "tools": {
+        "terminal": {
+          "always_allow": [
+            {
+              "pattern": "^grep\\b"
+            }
+          ]
+        }
+      }
+    },
+    "default_profile": "write",
+    "default_model": {
+      "effort": "high",
+      "provider": "copilot_chat",
+      "model": "claude-opus-4.6",
+      "enable_thinking": true
+    },
     "enabled": true,
     "button": true,
     "favorite_models": [],
