@@ -22,5 +22,52 @@
     "bindings": {
       "f12": "editor::ToggleCodeActions"
     }
+  },
+  {
+    "context": "Workspace",
+    "unbind": {
+      "cmd-w": "workspace::CloseActiveDock"
+    }
+  },
+  {
+    "context": "Workspace",
+    "bindings": {
+      "cmd-w": [
+        "pane::CloseActiveItem",
+        {
+          "close_pinned": false
+        }
+      ]
+    }
+  },
+  {
+    "context": "Workspace",
+    "unbind": {
+      "cmd-b": "workspace::ToggleLeftDock"
+    }
+  },
+  {
+    "context": "Editor",
+    "unbind": {
+      "cmd-k cmd-b": "editor::BlameHover"
+    }
+  },
+  {
+    "context": "Workspace",
+    "unbind": {
+      "cmd-r": "workspace::ToggleRightDock"
+    }
+  },
+  {
+    "context": "Workspace",
+    "bindings": {
+      "cmd-k cmd-h": "workspace::ToggleRightDock"
+    }
+  },
+  {
+    "context": "Workspace",
+    "unbind": {
+      "alt-cmd-b": "workspace::ToggleRightDock"
+    }
   }
 ]
