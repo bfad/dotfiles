@@ -58,3 +58,6 @@
 
 [includeIf "gitdir:~/world/"]
     path = work_author.inc
+
+[includeIf "gitdir:~/src/github.com/shopify-playground/"]
+    path = work_author.inc
