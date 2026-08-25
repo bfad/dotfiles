@@ -69,5 +69,34 @@
     "unbind": {
       "alt-cmd-b": "workspace::ToggleRightDock"
     }
+  },
+  {
+    "context": "Editor",
+    "bindings": {
+      "ctrl-u": "editor::ConvertToUpperCase"
+    }
+  },
+  {
+    "context": "Editor",
+    "unbind": {
+      "cmd-k cmd-u": "editor::ConvertToUpperCase"
+    }
+  },
+  {
+    "context": "Editor",
+    "bindings": {
+      "ctrl-shift-u": "editor::ConvertToLowerCase"
+    }
+  },
+  {
+    "context": "Editor",
+    "unbind": {
+      "cmd-k cmd-l": "editor::ConvertToLowerCase"
+    }
+  },
+  {
+    "bindings": {
+      "ctrl-alt-u": "editor::ConvertToUpperCamelCase"
+    }
   }
 ]
