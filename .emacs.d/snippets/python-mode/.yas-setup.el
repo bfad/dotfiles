@@ -1,3 +1,4 @@
+;;; .yas-setup.el --- yasnippet helpers for python-mode  -*- lexical-binding: t -*-
 (defun python-split-args (arg-string)
   "Split a python argument string into ((name, default)..) tuples"
   (mapcar (lambda (x)
@@ -19,4 +20,4 @@
       (mapconcat 'identity (list "Keyword Arguments:" formatted-args) indent))))
 
 (add-hook 'python-mode-hook
-          '(lambda () (set (make-local-variable 'yas-indent-line) 'fixed)))
+          (lambda () (setq-local yas-indent-line 'fixed)))

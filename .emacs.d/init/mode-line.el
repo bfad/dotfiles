@@ -1,3 +1,4 @@
+;;; mode-line.el --- Custom mode-line format  -*- lexical-binding: t -*-
 ;; Format the mode-line at the bottom
 (defvar my-mode-line-position-map
   (let ((map (make-sparse-keymap)))

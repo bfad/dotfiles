@@ -1,3 +1,4 @@
+;;; ruby.el --- Ruby editing configuration  -*- lexical-binding: t -*-
 ;; Configure Ruby Code Editing
 
 ;; Rake files are ruby, too, as are gemspecs, rackup files, and gemfiles.
@@ -41,13 +42,12 @@
 (setq ruby-align-to-stmt-keywords t)
 
 ;; Configure robe company support
-(eval-after-load 'company
-  '(push 'company-robe company-backends))
+(with-eval-after-load 'company
+  (push 'company-robe company-backends))
 
 ;; Configure chruby
 (require 'chruby)
-(defadvice inf-ruby-console-auto (before activate-rvm-for-robe activate)
-  (chruby-use-corresponding))
+(advice-add 'inf-ruby-console-auto :before #'chruby-use-corresponding)
 
 ;; Allow for pry / byebug break points when running specs
 ;; When you've hit the breakpoint, hit C-x C-q to enable inf-ruby

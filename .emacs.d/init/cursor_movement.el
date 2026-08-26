@@ -1,3 +1,4 @@
+;;; cursor_movement.el --- Cursor movement and selection  -*- lexical-binding: t -*-
 (defun smarter-move-beginning-of-line (arg)
     "Move point back to indentation of beginning of line.
 

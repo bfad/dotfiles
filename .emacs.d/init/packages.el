@@ -1,13 +1,12 @@
+;;; packages.el --- Package archives and package list  -*- lexical-binding: t -*-
 ;; Load all package managers
 (require 'package)
 
-(add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/"))
-(add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
-(add-to-list 'package-archives '("melpa-stable" . "http://stable.melpa.org/packages/"))
+(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
 
 (let ((my-packages (list
+                    's           ; string helpers, used by init/terminal.el
                     'magit
-                    'git-commit
                     'multiple-cursors
                     'visual-fill-column
                     ; SEEMS TO BE BROKEN 'origami
@@ -42,8 +41,6 @@
                     'haml-mode
                     'slim-mode
                     'coffee-mode
-                    'scss-mode
-                    'sass-mode
                     'markdown-mode
                     'rainbow-mode
                     'elixir-mode
@@ -63,13 +60,23 @@
   (package-initialize)
 
   ;; Ensure packages are installed
-  (mapcar
-   (lambda (package)
-     (if (package-installed-p package)
-         nil
-       (unless package-list-refreshed
-         (package-refresh-contents)
-         (setq package-list-refreshed t))
-       (package-install package)))
-   my-packages)
+  ;; Guard each installation so that an install error gives a warning at the end
+  ;; rather than leave Emacs half-configured.
+  (let (failed)
+  (dolist (package my-packages)
+    (unless (package-installed-p package)
+      (unless package-list-refreshed
+        (package-refresh-contents)
+        (setq package-list-refreshed t))
+        (condition-case err
+            (package-install package)
+          (error
+           (push (cons package (error-message-string err)) failed)))))
+    (when failed
+      (display-warning
+       'init
+       (concat "These packages failed to install:\n"
+               (mapconcat (lambda (f) (format "  %s: %s" (car f) (cdr f)))
+                          (nreverse failed) "\n"))
+       :warning)))
 )

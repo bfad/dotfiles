@@ -1,3 +1,7 @@
+;;; terminal.el --- Terminal integration via AppleScript  -*- lexical-binding: t -*-
+(require 's)        ; s-replace, s-replace-all
+(require 'vc-git)   ; vc-git-branches
+
 (defun terminal-run-command-in-custom-window (command window_prefix window_title &optional new_window_dir window_size)
   "Runs a command in the terminal"
   (unless new_window_dir (setq new_window_dir "~"))
@@ -21,17 +25,17 @@ tell IDE to runInTerminal({¬
 (defun terminal-goto-or-open-window-for-current-project (&optional size title)
   "Goes to or launches terminal tab for project optionally with specified size / title"
   (interactive)
-  (setq size (s-replace "\"" "\\\"" (or size "")))
-  (setq prefix (s-replace "\"" "\\\"" (projectile-project-name)))
-  (setq title (s-replace "\"" "\\\"" (or title (car (vc-git-branches)) "")))
-  (setq new_window_dir (projectile-project-root))
-  (do-applescript (s-replace-all `(("$$PREFIX$$" . ,prefix) ("$$TITLE$$" . ,title) ("$$SIZE$$" . ,size) ("$$STARTING_DIR$$" . ,new_window_dir)) "\
+  (let* ((size (s-replace "\"" "\\\"" (or size "")))
+         (title (s-replace "\"" "\\\"" (or title (car (vc-git-branches)) "")))
+         (prefix (s-replace "\"" "\\\"" (projectile-project-name)))
+         (new_window_dir (projectile-project-root)))
+    (do-applescript (s-replace-all `(("$$PREFIX$$" . ,prefix) ("$$TITLE$$" . ,title) ("$$SIZE$$" . ,size) ("$$STARTING_DIR$$" . ,new_window_dir)) "\
 tell script \"IDE\" to runInTerminal({¬
   prefix: \"📼$$PREFIX$$\",¬
   name: \"$$TITLE$$\",¬
   initDir: \"$$STARTING_DIR$$\",¬
   size: \"$$SIZE$$\"¬
 })
-")))
+"))))
 
 (global-set-key (kbd "C-s-t") 'terminal-goto-or-open-window-for-current-project)

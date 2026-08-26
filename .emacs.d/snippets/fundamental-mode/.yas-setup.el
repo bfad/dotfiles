@@ -1,3 +1,4 @@
+;;; .yas-setup.el --- yasnippet helpers for fundamental-mode  -*- lexical-binding: t -*-
 (defun ca-all-asscs (asslist query)
   "returns a list of all corresponding values (like rassoc)"
   (cond

@@ -1,4 +1,4 @@
-;;; twilight-theme.el --- Theme based on Textmate's Twilight theme for faces
+;;; twilight-theme.el --- Theme based on Textmate's Twilight theme for faces  -*- lexical-binding: t -*-
 ;;; Code based on the tango-dark theme code
 
 (deftheme twilight

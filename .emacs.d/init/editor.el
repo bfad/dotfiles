@@ -1,3 +1,4 @@
+;;; editor.el --- Basic editor behavior and navigation  -*- lexical-binding: t -*-
 ;; Configuration of basic editor behavior. This includes keyboard and mouse
 ;; navigation, common editing options (such as balancing parens), etc.
 
@@ -6,6 +7,10 @@
 
 ;; Turn off the backup files
 (setq make-backup-files nil)
+
+;; Pre-approve the rainbow-mode file-local eval so Emacs stops prompting.
+(setq safe-local-variable-values
+      '((eval when (fboundp 'rainbow-mode) (rainbow-mode 1))))
 
 ;; Automatically revert buffers if their files were changed externally
 (global-auto-revert-mode t)
@@ -42,14 +47,24 @@
 (setq-default indent-tabs-mode nil)
 (setq-default tab-width 4)
 
+;; Company completion settings.
+(setq company-minimum-prefix-length 1
+      company-idle-delay 0.3)
+
+;; Hideshow defaults (used for code folding)
+(setq hs-display-lines-hidden t     ; show "N lines hidden" by the ellipsis
+      hs-show-indicators t          ; fold indicators in the gutter
+      hs-indicator-type 'margin)
+
 ;; Useful settings for code files
 (add-hook 'prog-mode-hook
           (lambda ()
-            ;; Truncate lines insted of wrapping
-            (set-default 'truncate-lines t)
-            ;; Delete trailing whitespace & end files with a newline
-            (add-to-list 'write-file-functions 'delete-trailing-whitespace)
-            (setq require-final-newline t)
+            ;; Truncate lines instead of wrapping
+            (setq-local truncate-lines t)
+            ;; Delete trailing whitespace & end files with a newline.
+            ;; Buffer-local (trailing t) so this only affects prog buffers.
+            (add-hook 'before-save-hook #'delete-trailing-whitespace nil t)
+            (setq-local require-final-newline t)
             ;; Turn line numbering on
             (display-line-numbers-mode)
             ;;(linum-mode 1)
@@ -59,9 +74,8 @@
             (yas-minor-mode)
             ;; Add company-mode for auto completion previews
             (company-mode)
-	    ;; configure company mode
-	    (setq company-minimum-prefix-length 1)
-	    (setq company-idle-delay 0.3)
+            ;; Code folding
+            (hs-minor-mode)
            ))
 
 ;; The linum-mode is turned on for prog-mode, but this creates a function to add
@@ -83,8 +97,7 @@
 ;; --------- ;;
 
 ;; Smoother scrolling settings
-(setq redisplay-dont-pause t
-      scroll-margin 3
+(setq scroll-margin 3
       scroll-step 1
       mouse-wheel-scroll-amount '(1 ((shift) . 1))
       ;mouse-wheel-progressive-speed nil
@@ -232,7 +245,7 @@ used in the \"kill-buffer-query-functions\" list for non-file-visiting.
   )
 
 (global-set-key (kbd "s-n") 'buffer-new)
-(global-set-key (kbd "s-N") '(lambda () (interactive) (make-frame) (buffer-new)))
+(global-set-key (kbd "s-N") #'(lambda () (interactive) (make-frame) (buffer-new)))
 
 ;; Setup these bindings in iTerm/kitty so behaves like the GUI.
 (global-set-key (kbd "<f12> n") 'buffer-new)

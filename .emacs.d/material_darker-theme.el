@@ -1,4 +1,4 @@
-;;; material_darker-theme.el --- an Emacs 24 theme based on Material Theme (tmTheme)
+;;; material_darker-theme.el --- an Emacs 24 theme based on Material Theme (tmTheme)  -*- lexical-binding: t -*-
 ;;
 ;;; Author: Auto Converted to Emacs 24 by tmtheme-to-deftheme (tm2deftheme)
 ;;; Version: 1463347018

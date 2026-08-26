@@ -1,3 +1,4 @@
+;;; window_management.el --- Window management hydra  -*- lexical-binding: t -*-
 (defhydra hydra-window (:hint nil)
   "Window Management"
   ("v" split-window-right "Split Vertical")

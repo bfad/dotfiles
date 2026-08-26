@@ -1,3 +1,4 @@
+;;; movement.el --- Movement hydra  -*- lexical-binding: t -*-
 (defhydra hydra-movement (:hint nil)
   ;; TODO: Larger hint and get rid of hints for individual heads?
   ;; Include something about modifier keys too
@@ -11,7 +12,7 @@
   ("b" backward-char "Backward")
   ("C-b" backward-char)
   ("<left>" backward-char)
-  ("M-b" subward-backward)
+  ("M-b" subword-backward)
   ("M-<left>" backward-sexp)
 
   ("n" next-line "Next")
@@ -33,7 +34,7 @@
   ("C-l" recenter-top-bottom)
   ("g" goto-line "Goto Line")
 
-  ("m" set-mark-command "Set Mark" :bind nil)
+  ("SPC" set-mark-command "Set Mark")
   ("d" delete-char "Delete")
   ("C-d" delete-char)
   ("w" kill-region "Kill Selection")
@@ -45,7 +46,7 @@
   ("Y" yank-pop)
   ("M-y" yank-pop)
 
-  ("m" hydra-cursors/body "Multiple Cursors Mode", :exit t)
+  ("m" hydra-cursors/body "Multiple Cursors Mode" :exit t)
   ("N" mc/mark-next-like-this-word "MC Next Word")
   ("M-n" mc/mark-next-like-this-word)
   ("P" mc/mark-previous-word-like-this "MC Previous Word")
@@ -58,8 +59,8 @@
   ("<f12> n" mc/mark-next-like-this)
   ("<f12> p" mc/mark-previous-like-this)
 
-  ("c" hydra-cursors/body "Code Folding Mode", :exit t)
-  ("t" origami-recursively-toggle-node "Toggle Folding")
+  ("c" hydra-folding/body "Code Folding Mode" :exit t)
+  ("t" hs-cycle "Toggle Folding")
 
   ("q" hydra-modes/body "Quit" :exit t)
  )

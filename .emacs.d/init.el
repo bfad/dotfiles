@@ -1,8 +1,13 @@
+;;; init.el --- Emacs configuration entry point  -*- lexical-binding: t -*-
 ;; Added by Package.el.  This must come before configurations of
 ;; installed packages.  Don't delete this line.  If you don't want it,
 ;; just comment it out by adding a semicolon to the start of the line.
 ;; You may delete these explanatory comments.
 ;; Getting a warning that this is no longer necessary (package-initialize)
+
+;; Give Customize its own file to write to.
+(setq custom-file (expand-file-name "custom.el" user-emacs-directory))
+(load custom-file t)
 
 ;; Start with adding packages
 (load "~/.emacs.d/init/packages")
@@ -186,9 +191,6 @@ automatically but projectile-find-file will still be called."
 (key-chord-define-global ";c" 'hydra-cursors/body)
 (key-chord-define-global ";f" 'hydra-folding/body)
 
-;; Configure scss-mode
-(setq scss-compile-at-save nil)
-
 ;; Configure yasnippet
 (require 'yasnippet)
 (yas-reload-all)
@@ -201,20 +203,7 @@ automatically but projectile-find-file will still be called."
 (require 'git-commit)
 (add-hook 'git-commit-mode-hook (lambda () (setq-default fill-column 72)))
 
-;; Configure coffee-mode
-;; Configure coffee-mode
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(ansi-color-names-vector
-   ["black" "red3" "green3" "yellow3" "blue2" "magenta3" "cyan3" "gray90"])
- '(cursor-type 'bar)
- '(safe-local-variable-values '((eval when (fboundp 'rainbow-mode) (rainbow-mode 1)))))
-
 ;; Configure css-mode
-;; TODO: Check this works with scss and sass
 (add-hook 'css-mode-hook
           (lambda ()
             (rainbow-mode 1)
@@ -251,11 +240,3 @@ automatically but projectile-find-file will still be called."
 ;; Useful for MacOS GUI and using ag.el when ag is in /usr/local/bin
 (when (memq window-system '(mac ns))
   (exec-path-from-shell-initialize))
-
-
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )

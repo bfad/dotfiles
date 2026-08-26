@@ -1,3 +1,4 @@
+;;; cursors.el --- Multiple-cursors hydra  -*- lexical-binding: t -*-
 (defhydra hydra-cursors (:hint nil)
   "Multiple Cursors"
 

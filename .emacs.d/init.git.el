@@ -1,3 +1,4 @@
+;;; init.git.el --- Minimal init for git commit editing  -*- lexical-binding: t -*-
 (package-initialize)
 ;; Load all package managers
 (require 'package)
