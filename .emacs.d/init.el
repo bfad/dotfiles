@@ -11,6 +11,7 @@
 
 ;; Start with adding packages
 (load "~/.emacs.d/init/packages")
+(load "~/.emacs.d/init/treesit-setup")
 (load "~/.emacs.d/init/cursor_movement")
 
 ;; Put anything relating to basic editor behavior and navigation in here
@@ -35,9 +36,6 @@
 ;;(setq ac-auto-show-menu 0.2)
 ;;(setq ac-use-fuzzy t)
 
-;; setup company-flx
-(with-eval-after-load 'company
-  (company-flx-mode +1))
 
 
 ;; ;; Configure ido
@@ -150,7 +148,6 @@
 ;(global-origami-mode)
 
 ;; Configure neotree
-(require 'neotree)
 (global-set-key [f8] 'neotree-toggle)
 (setq neo-window-fixed-size nil)
 
@@ -197,43 +194,22 @@ automatically but projectile-find-file will still be called."
 
 ;; Configure JS indentation level
 (setq js-indent-level 2)
-(setq coffee-tab-width 2)
 
 ;; Setup git config
 (require 'git-commit)
 (add-hook 'git-commit-mode-hook (lambda () (setq-default fill-column 72)))
 
 ;; Configure css-mode
-(add-hook 'css-mode-hook
+(add-hook 'css-base-mode-hook
           (lambda ()
             (rainbow-mode 1)
             ))
 
-(setq-default elm-indent-offset 2)
-
 ;; Load ruby settings
 (load "~/.emacs.d/init/ruby")
 
-;; Configure YAML
-(require 'yaml-mode)
-(add-to-list 'auto-mode-alist '("\\.yml\\'" . yaml-mode))
-
-;; Configure dockerfile-mode
-(require 'dockerfile-mode)
-(add-to-list 'auto-mode-alist '("Dockerfile\\'" . dockerfile-mode))
-(add-to-list 'auto-mode-alist '("\\.dockerfile\\'" . dockerfile-mode))
-
-;; Elm mode
-(require 'elm-mode)
-
-;; Alchemist for Elixir
-(require 'alchemist)
-
-;; Pug templates
-(require 'pug-mode)
 
 ;; Web Mode
-(require 'web-mode)
 (add-to-list 'auto-mode-alist '("\\.tmpl\\'" . web-mode))
 
 ;; Set Emacs variable exec-path if launching MacOS GUI

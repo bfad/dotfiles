@@ -12,6 +12,23 @@
 (setq safe-local-variable-values
       '((eval when (fboundp 'rainbow-mode) (rainbow-mode 1))))
 
+;; Key hints after a command prefix (ex. C-c)
+(which-key-mode 1)
+(setq which-key-idle-delay 0.7)
+
+;; Session persistence beyond `desktop-save-mode'
+;; Persist minibuffer history (M-x, C-x C-f, and search) across sessions.
+(savehist-mode 1)
+;; Save and restore cursor position visited files
+(save-place-mode 1)
+
+;; Maintain a list of recently opened files
+(recentf-mode 1)
+(setq recentf-max-saved-items 200)
+
+;; y/n instead of the full yes/no prompt
+(setq use-short-answers t)
+
 ;; Automatically revert buffers if their files were changed externally
 (global-auto-revert-mode t)
 
@@ -89,21 +106,47 @@
 ;(global-linum-mode 1)
 ;(setq linum-format "%d ")
 
-;; Turn on multiple cursors
-(require 'multiple-cursors)
-
 ;; --------- ;;
 ;; Scrolling ;;
 ;; --------- ;;
 
 ;; Smoother scrolling settings
-(setq scroll-margin 3
-      scroll-step 1
+(setq scroll-step 1
       mouse-wheel-scroll-amount '(1 ((shift) . 1))
-      ;mouse-wheel-progressive-speed nil
-      scroll-preserve-screen-position t
-      scroll-conservatively 10000
-)
+      mouse-wheel-progressive-speed nil
+      mouse-wheel-follow-mouse t
+      scroll-conservatively 101)
+
+;; Use a function because `display-graphic-p' is nil when a daemon is starting.
+(defun my/apply-scroll-settings (&optional frame)
+  "Apply scrolling settings suited to FRAME's display type.
+FRAME defaults to the selected frame.  See the NOTE above for why
+`scroll-margin' has to be 0 wherever pixel scrolling is active."
+  (let ((gui (display-graphic-p frame)))
+    ;; Keep a margin only where nothing is pixel-scrolling underneath us.
+    (setq scroll-margin (if gui 0 3)
+          ;; `scroll-preserve-screen-position' re-anchors point on every scroll
+          ;; command, which turns each margin correction into a hard snap.
+          ;; Keyboard-only paging still benefits from it, so keep it on in the
+          ;; terminal and off in the GUI.
+          scroll-preserve-screen-position (not gui))
+    (when gui
+      (require 'pixel-scroll)
+      ;; macOS trackpad momentum overshoots and then gets clamped at the buffer
+      ;; edges, which reads as a bounce. Disable it for deterministic scrolling.
+      (setq pixel-scroll-precision-use-momentum nil
+            ;; Smoothly animate large jumps (PgUp/PgDn, scroll-up/down-command)
+            ;; instead of teleporting.
+            pixel-scroll-precision-interpolate-page t)
+      (pixel-scroll-precision-mode 1))))
+
+;; Apply now (covers plain `emacs' and `emacs -nw'), and again for each new
+;; frame so daemon clients get the right values. These variables are global, so
+;; a daemon serving a GUI *and* a terminal frame at once follows whichever frame
+;; was created last; that is the best a global can do.
+(my/apply-scroll-settings)
+(add-hook 'server-after-make-frame-hook #'my/apply-scroll-settings)
+(add-hook 'after-make-frame-functions #'my/apply-scroll-settings)
 
 ;; Problem with this is that it changes selection to be emacs selection instead
 ;; of Terminal selection. Since Terminal doesn't pass s-c, s-x, or s-v to emacs
@@ -115,35 +158,44 @@
 (xterm-mouse-mode t)
 ;; Turning on xterm-mouse-mode breaks scrolling for some reason
 ;; This fixes it
-(defun my-scroll-up ()
-  (interactive)
-  (scroll-up 1))
-(defun my-scroll-down ()
-  (interactive)
-  (scroll-down 1))
-(global-set-key [mouse-4] 'my-scroll-down)
-(global-set-key [mouse-5] 'my-scroll-up)
+;; NOTE: Seems fixed in recent Emacs versions.
+;; (defun my-scroll-up ()
+;;   (interactive)
+;;   (scroll-up 1))
+;; (defun my-scroll-down ()
+;;   (interactive)
+;;   (scroll-down 1))
+;; (global-set-key [mouse-4] 'my-scroll-down)
+;; (global-set-key [mouse-5] 'my-scroll-up)
 
-;; Get horizontal scrolling working for GUI
-;; Sort of works - the cursor has to be on the same line that needs scrolling
-(global-set-key [wheel-right] (lambda ()
-                                (interactive)
-                                (scroll-left 1)))
-(global-set-key [double-wheel-right] (lambda ()
-                                (interactive)
-                                (scroll-left 1)))
-(global-set-key [triple-wheel-right] (lambda ()
-                                (interactive)
-                                (scroll-left 1)))
-(global-set-key [wheel-left] (lambda ()
-                                (interactive)
-                                (scroll-right 1)))
-(global-set-key [double-wheel-left] (lambda ()
-                                (interactive)
-                                (scroll-right 1)))
-(global-set-key [triple-wheel-left] (lambda ()
-                                (interactive)
-                                (scroll-right 1)))
+;; ;; Get horizontal scrolling working for GUI
+;; ;; Sort of works - the cursor has to be on the same line that needs scrolling
+;; (global-set-key [wheel-right] (lambda ()
+;;                                 (interactive)
+;;                                 (scroll-left 1)))
+;; (global-set-key [double-wheel-right] (lambda ()
+;;                                 (interactive)
+;;                                 (scroll-left 1)))
+;; (global-set-key [triple-wheel-right] (lambda ()
+;;                                 (interactive)
+;;                                 (scroll-left 1)))
+;; (global-set-key [wheel-left] (lambda ()
+;;                                 (interactive)
+;;                                 (scroll-right 1)))
+;; (global-set-key [double-wheel-left] (lambda ()
+;;                                 (interactive)
+;;                                 (scroll-right 1)))
+;; (global-set-key [triple-wheel-left] (lambda ()
+;;                                 (interactive)
+;;                                 (scroll-right 1)))
+
+;; Hopefully fixes the above commented-out stuff
+;; Horizontal scrolling. Replaces six hand-written wheel-left/right lambdas:
+;; mwheel handles tilt/horizontal wheel events natively.
+(setq mouse-wheel-tilt-scroll t)
+
+;; Pixel-level trackpad scrolling is enabled per-frame in
+;; `my/apply-scroll-settings' above, since it must be paired with scroll-margin 0.
 
 
 ;; ------------------ ;;

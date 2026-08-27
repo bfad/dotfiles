@@ -24,14 +24,15 @@
 ;; We never want to edit Rubinius bytecode
 (add-to-list 'completion-ignored-extensions ".rbc")
 
-(define-key 'help-command (kbd "R") 'yari)
 
-(add-hook 'ruby-mode-hook
+(add-hook 'ruby-base-mode-hook
           (lambda ()
             ;; CamelCase aware editing operations
             (subword-mode 1)
             (inf-ruby-minor-mode 1)
-            (robe-mode 1)
+            ;; Start ruby-lsp, but only for files that belong to a project.
+            (when (project-current)
+              (eglot-ensure))
             ))
 
 ;; Disable adding magic encoding comments to UTF-8 files
@@ -41,9 +42,6 @@
 ;; Let's not indent everything so deep
 (setq ruby-align-to-stmt-keywords t)
 
-;; Configure robe company support
-(with-eval-after-load 'company
-  (push 'company-robe company-backends))
 
 ;; Configure chruby
 (require 'chruby)

@@ -14,7 +14,6 @@
                     'projectile
                     ;'flx-ido
                     ;'ido-vertical-mode
-                    'ag
                     'deadgrep
                     'exec-path-from-shell
                     'neotree
@@ -27,28 +26,18 @@
                     'smex
                     ;'auto-complete
                     'company
-                    'company-flx
-                    'company-inf-ruby
                     'company-web
                     'yasnippet
                     'web-mode
                     'chruby
                     'inf-ruby
-                    'yari
-                    'rinari
-                    'robe
                     'rspec-mode
                     'haml-mode
                     'slim-mode
-                    'coffee-mode
                     'markdown-mode
                     'rainbow-mode
-                    'elixir-mode
-                    'alchemist
                     'dockerfile-mode
                     'yaml-mode
-                    'elm-mode
-                    'pug-mode
                     'nginx-mode
                     ))
       (package-list-refreshed nil))
@@ -63,11 +52,11 @@
   ;; Guard each installation so that an install error gives a warning at the end
   ;; rather than leave Emacs half-configured.
   (let (failed)
-  (dolist (package my-packages)
-    (unless (package-installed-p package)
-      (unless package-list-refreshed
-        (package-refresh-contents)
-        (setq package-list-refreshed t))
+    (dolist (package my-packages)
+      (unless (package-installed-p package)
+        (unless package-list-refreshed
+          (package-refresh-contents)
+          (setq package-list-refreshed t))
         (condition-case err
             (package-install package)
           (error

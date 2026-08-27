@@ -7,10 +7,16 @@ elpa
 ac-comphist.dat
 ido.last
 places
+places.eld
 projectile-bookmarks.eld
 projectile.cache
+projectile-frecency.eld
 recentf
 smex-items
 transient/*
 /eln-cache/
-custom.el
+/tree-sitter/
+/custom.el
+/history
+/recentf.eld
+/tramp
