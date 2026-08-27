@@ -57,8 +57,10 @@
   (let ((filename (buffer-file-name)))
     (if (not (and filename (file-exists-p filename)))
         (message "Buffer is not visiting a file!")
-      (let ((relative_path (file-relative-name filename (projectile-project-root))))
-        (terminal-run-command-in-custom-window (s-concat "be rspec '" (s-replace "'" "'\"'\"'" relative_path) "'") (s-concat (projectile-project-name) ": RSpec") (projectile-project-root))))))
+      (let* ((pr (project-current t))
+             (root (project-root pr))
+             (relative_path (file-relative-name filename root)))
+        (terminal-run-command-in-custom-window (s-concat "be rspec '" (s-replace "'" "'\"'\"'" relative_path) "'") (s-concat (project-name pr) ": RSpec") root)))))
 
 (defun rspec-run-at-point-in-terminal ()
   "Runs the current file in the test terminal window"
@@ -66,5 +68,7 @@
   (let ((filename (buffer-file-name)))
     (if (not (and filename (file-exists-p filename)))
         (message "Buffer is not visiting a file!")
-      (let ((relative_path (file-relative-name filename (projectile-project-root))))
-        (terminal-run-command-in-custom-window (s-concat "be rspec '" (s-replace "'" "'\"'\"'" relative_path) ":" (format-mode-line "%l") "'") (s-concat (projectile-project-name) ": RSpec") (projectile-project-root))))))
+      (let* ((pr (project-current t))
+             (root (project-root pr))
+             (relative_path (file-relative-name filename root)))
+        (terminal-run-command-in-custom-window (s-concat "be rspec '" (s-replace "'" "'\"'\"'" relative_path) ":" (format-mode-line "%l") "'") (s-concat (project-name pr) ": RSpec") root)))))

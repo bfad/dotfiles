@@ -64,10 +64,6 @@
 (setq-default indent-tabs-mode nil)
 (setq-default tab-width 4)
 
-;; Company completion settings.
-(setq company-minimum-prefix-length 1
-      company-idle-delay 0.3)
-
 ;; Hideshow defaults (used for code folding)
 (setq hs-display-lines-hidden t     ; show "N lines hidden" by the ellipsis
       hs-show-indicators t          ; fold indicators in the gutter
@@ -89,8 +85,6 @@
             (subword-mode)
             ;; Add yasnippet for Textmate-like snippets
             (yas-minor-mode)
-            ;; Add company-mode for auto completion previews
-            (company-mode)
             ;; Code folding
             (hs-minor-mode)
            ))

@@ -25,10 +25,11 @@ tell IDE to runInTerminal({¬
 (defun terminal-goto-or-open-window-for-current-project (&optional size title)
   "Goes to or launches terminal tab for project optionally with specified size / title"
   (interactive)
-  (let* ((size (s-replace "\"" "\\\"" (or size "")))
+  (let* ((pr (project-current t))
+         (size (s-replace "\"" "\\\"" (or size "")))
          (title (s-replace "\"" "\\\"" (or title (car (vc-git-branches)) "")))
-         (prefix (s-replace "\"" "\\\"" (projectile-project-name)))
-         (new_window_dir (projectile-project-root)))
+         (prefix (s-replace "\"" "\\\"" (project-name pr)))
+         (new_window_dir (project-root pr)))
     (do-applescript (s-replace-all `(("$$PREFIX$$" . ,prefix) ("$$TITLE$$" . ,title) ("$$SIZE$$" . ,size) ("$$STARTING_DIR$$" . ,new_window_dir)) "\
 tell script \"IDE\" to runInTerminal({¬
   prefix: \"📼$$PREFIX$$\",¬

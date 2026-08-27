@@ -11,22 +11,19 @@
                     'visual-fill-column
                     ; SEEMS TO BE BROKEN 'origami
                     'key-chord
-                    'projectile
-                    ;'flx-ido
-                    ;'ido-vertical-mode
                     'deadgrep
                     'exec-path-from-shell
                     'neotree
                     'hydra
                     'avy
-                    'ivy
-                    'counsel
-                    'swiper
-                    'flx
-                    'smex
-                    ;'auto-complete
-                    'company
-                    'company-web
+                    'vertico
+                    'orderless
+                    'marginalia
+                    'consult
+                    'embark
+                    'embark-consult
+                    'corfu
+                    'cape
                     'yasnippet
                     'web-mode
                     'chruby
