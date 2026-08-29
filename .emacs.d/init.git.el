@@ -35,9 +35,18 @@
 (load "~/.emacs.d/init/cursor_movement")
 (load "~/.emacs.d/init/editor")
 (load "~/.emacs.d/init/appearance")
+(load "~/.emacs.d/init/mode-line")
+
+(setq inhibit-startup-screen t)
 
 (require 'git-commit)
+
+;; Don't collapse diffs from `git commit -v` by default.
+;; (Also removes the ability to collapse at all, though.)
+(remove-hook 'git-commit-setup-hook #'git-commit-collapse-diff)
+
 (global-git-commit-mode t)
+
 
 ; cutoff for word wrap
 (setq-default fill-column 72)

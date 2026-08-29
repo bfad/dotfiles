@@ -3,14 +3,16 @@
 .ackrc
 .emacs.desktop*
 .mc-lists.el
-elpa
 ac-comphist.dat
 places
 places.eld
 recentf
 transient/*
+/elpa/
 /eln-cache/
+/games/
 /tree-sitter/
+/url/
 /custom.el
 /history
 /recentf.eld
