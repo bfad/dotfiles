@@ -29,12 +29,20 @@
 ;; Languages and file types
 (load "~/.emacs.d/init/languages")
 
-;; Emacs desktop (saves state to reload when reopening)
-;; When running an emacs daemon, start it with `--no-desktop` option so it won't
-;; load the desktop frames itself. To load saved desktop in GUI client, run:
-;; `emacsclient -n -c -e '(progn (desktop-save-mode 1) (desktop-read))`
-(setq desktop-restore-in-current-display t)
-(desktop-save-mode 1)
+;; The goal is for the first connected client to restore desktop state into its frame rather
+;; than an invisible daemon frame getting it. So first frame that connects gets the restored
+;; desktop and turns back on `desktop-save-mode`.
+(defun my-desktop-init-client ()
+  "Restore the desktop when the first client frame appears."
+  (remove-hook 'server-after-make-frame-hook #'my-desktop-init-client)
+  (desktop-read)
+  (desktop-save-mode 1))
+
+(if (daemonp)
+    (progn
+      (desktop-save-mode 0)
+      (add-hook 'server-after-make-frame-hook #'my-desktop-init-client))
+  (desktop-save-mode 1))
 
 
 ;; Configure Origami for code folding
