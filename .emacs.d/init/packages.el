@@ -27,6 +27,7 @@
                     'yasnippet
                     'web-mode
                     'chruby
+                    'shadowenv
                     'inf-ruby
                     'rspec-mode
                     'haml-mode
