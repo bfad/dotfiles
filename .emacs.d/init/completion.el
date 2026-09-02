@@ -10,68 +10,81 @@
 ;; Minibuffer ;;
 ;; ---------- ;;
 
-(vertico-mode 1)
-(setq vertico-cycle t)
-(setq vertico-count 15)
+(use-package vertico
+  :custom
+  (vertico-cycle t)
+  (vertico-count 15)
+  :bind (:map vertico-map
+              ;; Keep s-g moving down the candidate list.
+              ("s-g" . vertico-next))
+  :init
+  (vertico-mode 1))
 
 ;; Path-aware RET and DEL inside file prompts.
-(require 'vertico-directory)
-(define-key vertico-map (kbd "RET")   #'vertico-directory-enter)
-(define-key vertico-map (kbd "DEL")   #'vertico-directory-delete-char)
-(define-key vertico-map (kbd "M-DEL") #'vertico-directory-delete-word)
-(add-hook 'rfn-eshadow-update-overlay-hook #'vertico-directory-tidy)
-
-;; Keep s-g moving down the candidate list.
-(define-key vertico-map (kbd "s-g") #'vertico-next)
+(use-package vertico-directory
+  :ensure nil    ;; ships as part of vertico package, no need to install
+  :after vertico
+  :demand t
+  :bind (:map vertico-map
+              ("RET"   . vertico-directory-enter)
+              ("DEL"   . vertico-directory-delete-char)
+              ("M-DEL" . vertico-directory-delete-word))
+  :hook (rfn-eshadow-update-overlay . vertico-directory-tidy))
 
 ;; -------- ;;
 ;; Matching ;;
 ;; -------- ;;
 
 ;; Orderless has to be loaded to use `orderless-define-completion-style` below.
-(require 'orderless)
-
-;; Fuzzy-matching
-(setq completion-styles '(orderless basic))
-(setq completion-category-defaults nil)
-(setq orderless-matching-styles
-      '(orderless-literal orderless-regexp orderless-flex))
-
-;; A flex-free variant for callers that want steadier candidate ordering.
-;; init/consult.el uses it for consult-line.
-(orderless-define-completion-style my-orderless-literal
-  "Orderless with flex matching left out."
-  (orderless-matching-styles '(orderless-literal orderless-regexp)))
-
-;; Per-category tuning.  Packages add their own entries from their own files.
-(setq completion-category-overrides
-      '((file (styles partial-completion orderless))))
+;; It's also needed for `my-project-find-file' in init/projects.el.
+(use-package orderless
+  :demand t
+  :custom
+  ;; Fuzzy-matching
+  (completion-styles '(orderless basic))
+  (completion-category-defaults nil)
+  (orderless-matching-styles
+   '(orderless-literal orderless-regexp orderless-flex))
+  (completion-category-overrides
+   '((file (styles partial-completion orderless))))
+  :config
+  ;; A flex-free variant for callers that want steadier candidate ordering.
+  ;; init/consult.el uses it for consult-line.
+  (orderless-define-completion-style my-orderless-literal
+    "Orderless with flex matching left out."
+    (orderless-matching-styles '(orderless-literal orderless-regexp))))
 
 ;; ----------- ;;
 ;; Annotations ;;
 ;; ----------- ;;
 
 ;; Docstrings for commands, major mode and size for files.
-(marginalia-mode 1)
+(use-package marginalia
+  :init
+  (marginalia-mode 1))
 
 ;; --------- ;;
 ;; In-buffer ;;
 ;; --------- ;;
 
-(global-corfu-mode 1)
-;; corfu-mode requires the bundled corfu-auto.el itself once this is set;
-;; corfu-auto-prefix and corfu-auto-delay are defined there.
-(setq corfu-auto t)
-(setq corfu-auto-prefix 1)
-(setq corfu-auto-delay 0.3)
-(setq corfu-cycle t)
-
-;; Documentation for the selected candidate, beside the popup.
-(with-eval-after-load 'corfu
+(use-package corfu
+  :custom
+  (corfu-auto t)
+  (corfu-auto-prefix 1)
+  (corfu-auto-delay 0.3)
+  (corfu-cycle t)
+  :init
+  (global-corfu-mode 1)
+  :config
+  (require 'corfu-auto)
+  ;; Documentation for the selected candidate, beside the popup.
   (require 'corfu-popupinfo)
   (corfu-popupinfo-mode 1))
 
 ;; Cape supplies the generic completions.
-;; Listed in the reverse order they run as add-hook prepends.
-(add-hook 'completion-at-point-functions #'cape-dabbrev)
-(add-hook 'completion-at-point-functions #'cape-file)
+(use-package cape
+  :defer t
+  :init
+  ;; Listed in the reverse order they run as add-hook prepends.
+  (add-hook 'completion-at-point-functions #'cape-dabbrev)
+  (add-hook 'completion-at-point-functions #'cape-file))

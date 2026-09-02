@@ -1,25 +1,18 @@
 ;;; ruby.el --- Ruby editing configuration  -*- lexical-binding: t -*-
 ;; Configure Ruby Code Editing
 
-;; Rake files are ruby, too, as are gemspecs, rackup files, and gemfiles.
-(add-to-list 'auto-mode-alist '("\\.rake\\'" . ruby-mode))
-(add-to-list 'auto-mode-alist '("Rakefile\\'" . ruby-mode))
-(add-to-list 'auto-mode-alist '("\\.gemspec\\'" . ruby-mode))
-(add-to-list 'auto-mode-alist '("\\.ru\\'" . ruby-mode))
-(add-to-list 'auto-mode-alist '("Gemfile\\'" . ruby-mode))
-(add-to-list 'auto-mode-alist '("Guardfile\\'" . ruby-mode))
-(add-to-list 'auto-mode-alist '("Capfile\\'" . ruby-mode))
-(add-to-list 'auto-mode-alist '("\\.cap\\'" . ruby-mode))
-(add-to-list 'auto-mode-alist '("\\.thor\\'" . ruby-mode))
-(add-to-list 'auto-mode-alist '("\\.rabl\\'" . ruby-mode))
-(add-to-list 'auto-mode-alist '("Thorfile\\'" . ruby-mode))
-(add-to-list 'auto-mode-alist '("Vagrantfile\\'" . ruby-mode))
-(add-to-list 'auto-mode-alist '("\\.jbuilder\\'" . ruby-mode))
-(add-to-list 'auto-mode-alist '("Podfile\\'" . ruby-mode))
-(add-to-list 'auto-mode-alist '("\\.podspec\\'" . ruby-mode))
-(add-to-list 'auto-mode-alist '("Puppetfile\\'" . ruby-mode))
-(add-to-list 'auto-mode-alist '("Berksfile\\'" . ruby-mode))
-(add-to-list 'auto-mode-alist '("Appraisals\\'" . ruby-mode))
+(use-package ruby-mode
+  :ensure nil
+  ;; Rake files are ruby, too, as are gemspecs, rackup files, and gemfiles.
+  :mode ("\\.rake\\'" "Rakefile\\'" "\\.gemspec\\'" "\\.ru\\'" "Gemfile\\'"
+         "Guardfile\\'" "Capfile\\'" "\\.cap\\'" "\\.thor\\'" "\\.rabl\\'"
+         "Thorfile\\'" "Vagrantfile\\'" "\\.jbuilder\\'" "Podfile\\'"
+         "\\.podspec\\'" "Puppetfile\\'" "Berksfile\\'" "Appraisals\\'")
+  :custom
+  ;; Disable adding magic encoding comments to UTF-8 files
+  (ruby-insert-encoding-magic-comment nil)
+  ;; Let's not indent everything so deep
+  (ruby-align-to-stmt-keywords t))
 
 ;; We never want to edit Rubinius bytecode
 (add-to-list 'completion-ignored-extensions ".rbc")
@@ -64,17 +57,22 @@ whichever was used, or nil, which is handy when debugging."
               (eglot-ensure))
             ))
 
-;; Disable adding magic encoding comments to UTF-8 files
-(setq ruby-insert-encoding-magic-comment nil)
 ;;(setq enh-ruby-add-encoding-comment-on-save 0) ;; If I ever add enh-ruby
 
-;; Let's not indent everything so deep
-(setq ruby-align-to-stmt-keywords t)
-
+(use-package shadowenv :defer t)
+(use-package inf-ruby
+  ;; Allow for pry / byebug break points when running specs.
+  ;; When you've hit the breakpoint, hit C-x C-q to enable inf-ruby.
+  :hook (after-init . inf-ruby-switch-setup))
+(use-package rspec-mode :defer t)
 
 ;; Configure chruby
-(require 'chruby)
-(advice-add 'inf-ruby-console-auto :before #'chruby-use-corresponding)
+(use-package chruby
+  :demand t
+  :config
+  ;; Pick the project's Ruby before an inf-ruby console starts.  `advice-add'
+  ;; works on a function that is not defined yet, so inf-ruby stays deferred.
+  (advice-add 'inf-ruby-console-auto :before #'chruby-use-corresponding))
 
 ;; (with-eval-after-load 'eglot
 ;;   ;; Pin ruby-lsp. Eglot's stock Ruby entry tries solargraph first and only
@@ -88,10 +86,6 @@ whichever was used, or nil, which is handy when debugging."
 ;;   ;; well past eglot's 30s default, after which eglot reports the server as
 ;;   ;; dead. The first ever run (cold gem cache) is slower still.
 ;;   (setq eglot-connect-timeout 180))
-
-;; Allow for pry / byebug break points when running specs
-;; When you've hit the breakpoint, hit C-x C-q to enable inf-ruby
-(add-hook 'after-init-hook 'inf-ruby-switch-setup)
 
 (defun rspec-run-in-terminal ()
   "Runs the current file in the test terminal window"

@@ -251,11 +251,12 @@ FRAME defaults to the selected frame.  See the NOTE above for why
 
 ;; Multiple-Cursors Key Bindings
 ;; https://github.com/magnars/multiple-cursors.el
-(global-set-key (kbd "C-S-<down>") 'mc/mark-next-like-this)
-(global-set-key (kbd "C-S-<up>") 'mc/mark-previous-like-this)
-(global-set-key (kbd "M-n") 'mc/mark-next-like-this-word)
-(global-set-key (kbd "M-p") 'mc/mark-previous-word-like-this)
-(global-set-key (kbd "M-l") 'mc/edit-lines)
+(use-package multiple-cursors
+  :bind (("C-S-<down>" . mc/mark-next-like-this)
+         ("C-S-<up>"   . mc/mark-previous-like-this)
+         ("M-n"        . mc/mark-next-like-this-word)
+         ("M-p"        . mc/mark-previous-word-like-this)
+         ("M-l"        . mc/edit-lines)))
 
 ;; Similar to what I had before
 (global-set-key (kbd "M-U") 'downcase-word)

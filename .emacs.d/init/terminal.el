@@ -1,5 +1,5 @@
 ;;; terminal.el --- Terminal integration via AppleScript  -*- lexical-binding: t -*-
-(require 's)        ; s-replace, s-replace-all
+(use-package s :demand t :functions (s-replace s-replace-all))
 (require 'vc-git)   ; vc-git-branches
 
 (defun terminal-run-command-in-custom-window (command window_prefix window_title &optional new_window_dir window_size)

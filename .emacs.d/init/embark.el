@@ -3,13 +3,15 @@
 ;; in a normal buffer it is the region, or the file / symbol / url at point.
 ;; Offered actions depend on the target's type.
 
-(global-set-key (kbd "C-.")   #'embark-act)
-(global-set-key (kbd "C-;")   #'embark-dwim)
-(global-set-key (kbd "C-h B") #'embark-bindings)
+(use-package embark
+  :bind (("C-."   . embark-act)
+         ("C-;"   . embark-dwim)
+         ("C-h B" . embark-bindings)))
 
 ;; embark-consult exists only to bridge embark and consult: it previews the
 ;; candidate under point in collect buffers, and teaches embark to export
 ;; consult results into a grep-style buffer.
-(with-eval-after-load 'embark
-  (require 'embark-consult)
-  (add-hook 'embark-collect-mode-hook #'consult-preview-at-point-mode))
+(use-package embark-consult
+  :after embark
+  :demand t
+  :hook (embark-collect-mode . consult-preview-at-point-mode))
