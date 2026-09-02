@@ -1,19 +1,25 @@
 ;;; languages.el --- Settings for particular languages and file types  -*- lexical-binding: t -*-
 
-;; Languages with larger configs
-(load "~/.emacs.d/init/ruby")
+(use-package haml-mode :defer t)
+(use-package slim-mode :defer t)
+(use-package markdown-mode :defer t)
+(use-package dockerfile-mode :defer t)
+(use-package yaml-mode :defer t)
+(use-package nginx-mode :defer t)
 
 ;; --- (S)CSS ---
-(add-hook 'css-base-mode-hook
-          (lambda ()
-            (rainbow-mode 1)
-            ))
+(use-package rainbow-mode
+  :hook (css-base-mode . rainbow-mode))
 
 ;; --- JavaScript ---
 (setq js-indent-level 2)
 
 ;; --- Templates ---
-(add-to-list 'auto-mode-alist '("\\.tmpl\\'" . web-mode))
+(use-package web-mode
+  :mode "\\.tmpl\\'")
 
 ;; --- Git commit messages ---
 (add-hook 'git-commit-mode-hook (lambda () (setq-local fill-column 72)))
+
+;; Languages with larger configs
+(load "~/.emacs.d/init/ruby")

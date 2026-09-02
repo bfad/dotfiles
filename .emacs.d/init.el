@@ -50,8 +50,9 @@
 ;(global-origami-mode)
 
 ;; Configure neotree
-(global-set-key [f8] 'neotree-toggle)
-(setq neo-window-fixed-size nil)
+(use-package neotree
+  :bind ([f8] . neotree-toggle)
+  :custom (neo-window-fixed-size nil))
 
 ;; Show the project in neotree when switching projects, then pick a file.
 (defun my-neotree-project-action ()
@@ -63,31 +64,40 @@
 
 
 ;; Configure RipGrep via deadgrep
-(global-set-key (kbd "C-c s") #'deadgrep)
+(use-package deadgrep :bind ("C-c s" . deadgrep))
 
 ;; Configure hydra
-(require 'hydra)
-(load "~/.emacs.d/init/hydra/modes")
-(load "~/.emacs.d/init/hydra/window_management")
-(load "~/.emacs.d/init/hydra/movement")
-(load "~/.emacs.d/init/hydra/cursors")
-(load "~/.emacs.d/init/hydra/folding")
+(use-package hydra
+  :demand t
+  :config
+  (load "~/.emacs.d/init/hydra/modes")
+  (load "~/.emacs.d/init/hydra/window_management")
+  (load "~/.emacs.d/init/hydra/movement")
+  (load "~/.emacs.d/init/hydra/cursors")
+  (load "~/.emacs.d/init/hydra/folding"))
 
 ;; Configure key-chord for use with hydra
-(require 'key-chord)
-(key-chord-mode t)
-(key-chord-define-global ";h" 'hydra-modes/body)
-(key-chord-define-global ";w" 'hydra-window/body)
-(key-chord-define-global ";m" 'hydra-movement/body)
-(key-chord-define-global ";c" 'hydra-cursors/body)
-(key-chord-define-global ";f" 'hydra-folding/body)
+(use-package key-chord
+  :demand t
+  :config
+  (key-chord-mode t)
+  (key-chord-define-global ";h" 'hydra-modes/body)
+  (key-chord-define-global ";w" 'hydra-window/body)
+  (key-chord-define-global ";m" 'hydra-movement/body)
+  (key-chord-define-global ";c" 'hydra-cursors/body)
+  (key-chord-define-global ";f" 'hydra-folding/body))
 
 ;; Configure yasnippet
-(require 'yasnippet)
-(yas-reload-all)
+(use-package yasnippet
+  :demand t
+  :config
+  (yas-reload-all))
 
 
 ;; Set Emacs variable exec-path if launching MacOS GUI
 ;; Useful for MacOS GUI and using ag.el when ag is in /usr/local/bin
-(when (memq window-system '(mac ns))
+(use-package exec-path-from-shell
+  :if (memq window-system '(mac ns))
+  :demand t
+  :config
   (exec-path-from-shell-initialize))
