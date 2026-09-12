@@ -340,10 +340,15 @@ With a prefix ARG, shift by that many indentation steps."
 ;; Similar to what I had before
 (global-set-key (kbd "M-U") 'downcase-word)
 
+;; Mac commands for (Un)Redo.
+(global-set-key (kbd "s-z") #'undo-only)
+(global-set-key (kbd "s-Z") #'undo-redo)
+
 ;; Setup these bindings in iTerm/kitty to get GUI commands
 ;; The <f12> key represents the command key in the GUI
 (global-set-key (kbd "<f12> k") 'kill-this-buffer)
-(global-set-key (kbd "<f12> z") 'undo)
+(global-set-key (kbd "<f12> z") 'undo-only)
+(global-set-key (kbd "<f12> Z") 'undo-redo)
 (global-set-key (kbd "<f12> l") 'goto-line)
 
 
