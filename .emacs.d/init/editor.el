@@ -249,6 +249,85 @@ FRAME defaults to the selected frame.  See the NOTE above for why
 (global-set-key (kbd "M-<up>") 'move-line-up)
 (global-set-key (kbd "M-<down>") 'move-line-down)
 
+;; Shift the indentation of the region (or the current line) left and right.
+;; These commands wrap `indent-rigidly' so that 1. the indent matches the major mode's own
+;; indentation width and 2. the region stays active so that the action can be repeated.
+(defvar my/indent-shift-width-alist
+  '((css-base-mode   . css-indent-offset)             ; css-mode, scss-mode
+    (dockerfile-mode . dockerfile-indent-offset)      ; and dockerfile-ts-mode
+    (haml-mode       . haml-indent-offset)
+    (js-base-mode    . js-indent-level)               ; js-mode, js-ts-mode
+    (js-json-mode    . js-indent-level)               ; derives from `prog-mode', not `js-mode'
+    (json-ts-mode    . json-ts-indent-offset)         ; its extra parent, json-mode, is not installed
+    (lisp-data-mode  . 2)                             ; emacs-lisp-mode, lisp-mode
+    (markdown-mode   . markdown-list-indent-width)
+    (nginx-mode      . nginx-indent-level)
+    (ruby-base-mode  . ruby-indent-level)             ; ruby-mode, ruby-ts-mode
+    (sh-base-mode    . sh-basic-offset)               ; sh-mode, bash-ts-mode
+    (slim-mode       . slim-indent-offset)
+    (web-mode        . web-mode-code-indent-offset)
+    (yaml-mode       . yaml-indent-offset))           ; and yaml-ts-mode
+  "How wide one indentation step is, per major mode.
+
+Keys are matched against `major-mode' and then each of its parents, so an
+entry for a base mode covers all of its variants. Values are either the variable
+holding the mode's indent width (preferred) or a literal integer.
+
+Modes that are absent fall back to `tab-width'.")
+
+(defun my/indent-shift-width ()
+  "Return the number of columns one indentation step is worth here.
+Consults `my/indent-shift-width-alist', falling back to `tab-width'."
+  (if indent-tabs-mode
+      ;; This buffer indents with tabs, and `indent-to' can only emit a tab per
+      ;; whole `tab-width' columns: any other step would leave spaces, or a mix
+      ;; of tabs and spaces, in a tab-indented file.
+      tab-width
+    (or (seq-some
+         (lambda (mode)
+           (when-let* ((entry (assq mode my/indent-shift-width-alist))
+                       (spec (cdr entry))
+                       (width (cond ((integerp spec) spec)
+                                    ((and (symbolp spec) (boundp spec))
+                                     (symbol-value spec)))))
+             (and (integerp width) (> width 0) width)))
+         (derived-mode-all-parents major-mode))
+        tab-width)))
+
+(defun my/indent-shift (columns)
+  "Rigidly shift the active region, or the current line, by COLUMNS."
+  ;; Buffer modifications set `deactivate-mark'; let-binding it means the
+  ;; pre-command value is restored afterwards, keeping the region selected.
+  (let ((deactivate-mark nil))
+    (if (use-region-p)
+        (indent-rigidly (save-excursion (goto-char (region-beginning))
+                                        (line-beginning-position))
+                        ;; A region ending exactly at a line start does not
+                        ;; include that line, which is what selecting whole
+                        ;; lines with C-a/C-n looks like.
+                        (save-excursion (goto-char (region-end))
+                                        (if (bolp) (point) (line-end-position)))
+                        columns)
+      (indent-rigidly (line-beginning-position) (line-end-position) columns))))
+
+(defun my/indent-shift-right (&optional arg)
+  "Increase the indentation of the region, or the current line.
+With a prefix ARG, shift by that many indentation steps."
+  (interactive "p")
+  (my/indent-shift (* (or arg 1) (my/indent-shift-width))))
+
+(defun my/indent-shift-left (&optional arg)
+  "Decrease the indentation of the region, or the current line.
+With a prefix ARG, shift by that many indentation steps."
+  (interactive "p")
+  (my/indent-shift (* (or arg 1) (- (my/indent-shift-width)))))
+
+;; Bound in `prog-mode-map' so this applies only to every programming mode
+(define-key prog-mode-map (kbd "s-]") #'my/indent-shift-right)
+(define-key prog-mode-map (kbd "s-[") #'my/indent-shift-left)
+(define-key prog-mode-map (kbd "<f12> ]") #'my/indent-shift-right)
+(define-key prog-mode-map (kbd "<f12> [") #'my/indent-shift-left)
+
 ;; Multiple-Cursors Key Bindings
 ;; https://github.com/magnars/multiple-cursors.el
 (use-package multiple-cursors
