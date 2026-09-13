@@ -340,6 +340,55 @@ With a prefix ARG, shift by that many indentation steps."
 ;; Similar to what I had before
 (global-set-key (kbd "M-U") 'downcase-word)
 
+;; ------ ;;
+;; Escape ;;
+;; ------ ;;
+
+;; Configure Escape to mean "cancel" rather than the Meta prefix. Instead of binding it to a
+;; command, it is translated into pressing `C-g' so every `C-g' binding is inherited. (For
+;; example, multiple cursor's `mc/keyboard-quit'.)
+;;
+;; Terminal: Escape arrives as raw byte 27, indistinguishable from the first byte of every
+;; arrow/function-key sequence and from Option sent as "Esc+". My `my/esc-translate' follows
+;; evil-mode's resolution a lone ESC with nothing behind it becomes `escape' (and thus C-g),
+;; while anything followed by more input is left alone, so <f12> bindings, arrow keys and
+;; Meta chords keep working.
+;;
+;; CAVEAT: this is C-g as a *key*, not as the interrupt character. Real C-g aborts a command
+;; that is already running, because `quit-char' is handled when the event is read, before
+;; any keymap lookup. Escape only acts at the command loop, so a stuck command or an early
+;; abort of a command still requires C-g.
+
+(defvar my/esc-delay 0.02
+  "Seconds to wait for more input before treating a bare ESC as `escape'.
+Raise it if a flaky ssh link splits escape sequences across packets and
+arrow keys start behaving like Escape; lower it if Escape feels laggy.")
+
+(defun my/esc-translate (prompt)
+  "Translate a lone ESC byte into the `escape' key.
+Returning PROMPT unchanged is how a `input-decode-map' function says \"no
+translation\", which is what happens whenever more input is already pending."
+  (let ((keys (this-single-command-keys)))
+    (if (and (> (length keys) 0)
+             (eq (aref keys (1- (length keys))) ?\e)
+             (sit-for my/esc-delay))
+        [escape]
+      prompt)))
+
+(defun my/setup-tty-escape (&optional _frame)
+  "Make a bare ESC produce `escape' on terminal frames.
+`input-decode-map' is terminal-local, hence the `tty-setup-hook'."
+  (unless (display-graphic-p)
+    (define-key input-decode-map [?\e] #'my/esc-translate)))
+
+(my/setup-tty-escape)
+(add-hook 'tty-setup-hook #'my/setup-tty-escape)
+
+;; The `function-key-map' degrades the `escape' event into ESC (the Meta prefix) allowing
+;; the subsequent `key-translation-map' to do its translation
+(define-key function-key-map [escape] nil)
+(define-key key-translation-map [escape] (kbd "C-g"))
+
 ;; Mac commands for (Un)Redo.
 (global-set-key (kbd "s-z") #'undo-only)
 (global-set-key (kbd "s-Z") #'undo-redo)
