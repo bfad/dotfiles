@@ -105,11 +105,11 @@
 ;; --------- ;;
 
 ;; Smoother scrolling settings
-(setq scroll-step 1
-      mouse-wheel-scroll-amount '(1 ((shift) . 1))
-      mouse-wheel-progressive-speed nil
-      mouse-wheel-follow-mouse t
-      scroll-conservatively 101)
+;; (setq scroll-step 1
+;;       mouse-wheel-scroll-amount '(1 ((shift) . 1))
+;;       mouse-wheel-progressive-speed nil
+;;       mouse-wheel-follow-mouse t
+;;       scroll-conservatively 101)
 
 ;; Use a function because `display-graphic-p' is nil when a daemon is starting.
 (defun my/apply-scroll-settings (&optional frame)
@@ -185,8 +185,10 @@ FRAME defaults to the selected frame.  See the NOTE above for why
 
 ;; Hopefully fixes the above commented-out stuff
 ;; Horizontal scrolling. Replaces six hand-written wheel-left/right lambdas:
-;; mwheel handles tilt/horizontal wheel events natively.
-(setq mouse-wheel-tilt-scroll t)
+;; mwheel handles tilt/horizontal wheel events natively and flipping direction
+;; for "natural" MacOS scrollilng.
+(setq mouse-wheel-tilt-scroll t
+      mouse-wheel-flip-direction t)
 
 ;; Pixel-level trackpad scrolling is enabled per-frame in
 ;; `my/apply-scroll-settings' above, since it must be paired with scroll-margin 0.
