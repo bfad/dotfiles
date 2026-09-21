@@ -51,3 +51,4 @@
 
 ;; Languages with larger configs
 (load "~/.emacs.d/init/ruby")
+(load "~/.emacs.d/init/typescript")

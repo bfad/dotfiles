@@ -43,6 +43,8 @@
 ;;   css        v0.25.0  dda5cfc5722c429eaba1c910ca32c2c0c5bb1a3f  ABI 15
 ;;   javascript v0.25.0  44c892e0be055ac465d5eeddae6d3e194424e7de  ABI 15
 ;;   jsdoc      v0.23.2  b253abf68a73217b7a52c0ec254f4b6a7bb86665  ABI 14
+;;   typescript v0.23.2  f975a621f4e7f532fe322e13c4f79495e0a7b2e7  ABI 14
+;;   tsx        v0.23.2  f975a621f4e7f532fe322e13c4f79495e0a7b2e7  ABI 14
 ;;   json       v0.24.8  ee35a6ebefcef0c5c416c0d1ccec7370cfca5a24  ABI 14
 ;;   bash       v0.25.1  a06c2e4415e9bc0346c6b86d401879ffb44058f7  ABI 15
 ;;
@@ -64,6 +66,10 @@
                     :revision "v0.25.0")
         (jsdoc      "https://github.com/tree-sitter/tree-sitter-jsdoc"
                     :revision "v0.23.2")
+        (typescript "https://github.com/tree-sitter/tree-sitter-typescript"
+                    :revision "v0.23.2" :source-dir "typescript")
+        (tsx        "https://github.com/tree-sitter/tree-sitter-typescript"
+                    :revision "v0.23.2" :source-dir "tsx")
         (json       "https://github.com/tree-sitter/tree-sitter-json"
                     :revision "v0.24.8")
         (bash       "https://github.com/tree-sitter/tree-sitter-bash"
@@ -75,6 +81,8 @@
     (dockerfile-ts-mode dockerfile)
     (css-ts-mode        css)
     (js-ts-mode         javascript jsdoc)
+    (typescript-ts-mode typescript)
+    (tsx-ts-mode        tsx)
     (json-ts-mode       json)
     (bash-ts-mode       bash))
   "Tree-sitter major modes wanted here, mapped to the grammars each requires.
@@ -107,6 +115,10 @@ access and Xcode Command Line Tools."
 ;; itself once its grammar is installed.
 ;;
 ;; Run M-x my-treesit-install-missing-grammars, then restart.
+;;
+;; TypeScript is the exception to "you simply get the classic mode": there is
+;; no classic ts-free TypeScript mode in core, so TypeScript files are plain-
+;; text until M-x my-treesit-install-missing-grammars has been run.
 ;;
 ;; Why bother: remapping ruby-mode -> ruby-ts-mode upgrades every Rakefile /
 ;; Gemfile / .gemspec / Vagrantfile entry in init/ruby.el's auto-mode-alist at

@@ -267,6 +267,7 @@ FRAME defaults to the selected frame.  See the NOTE above for why
     (ruby-base-mode  . ruby-indent-level)             ; ruby-mode, ruby-ts-mode
     (sh-base-mode    . sh-basic-offset)               ; sh-mode, bash-ts-mode
     (slim-mode       . slim-indent-offset)
+    (typescript-ts-base-mode . typescript-ts-indent-offset) ; typescript-ts-mode, tsx-ts-mode
     (web-mode        . web-mode-code-indent-offset)
     (yaml-mode       . yaml-indent-offset))           ; and yaml-ts-mode
   "How wide one indentation step is, per major mode.
