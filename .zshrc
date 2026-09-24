@@ -137,6 +137,9 @@ source ~/.zshplugins/zsh-history-substring-search/zsh-history-substring-search.z
 bindkey '^[[A' history-substring-search-up
 bindkey '^[[B' history-substring-search-down
 
+# Pi colon-command shell integration
+source ~/.pi/agent/shell-plugin/pi.plugin.zsh
+
 # Override default prompt set above
 eval "$(starship init zsh)"
 
@@ -150,8 +153,6 @@ if [ -d /opt/homebrew/opt/fzf/shell/ ]; then
   # fzf key bindings
   source "/opt/homebrew/opt/fzf/shell/key-bindings.zsh"
 fi
-
-
 
 
 ###########
