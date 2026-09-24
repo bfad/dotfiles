@@ -1,0 +1,10 @@
+{
+  "defaultModel": "claude-opus-5",
+  "defaultProvider": "anthropic",
+  "defaultThinkingLevel": "xhigh",
+  "enableSkillCommands": true,
+  "packages": [
+    "git:github.com/leblancfg/pi-ansi-themes"
+  ],
+  "theme": "ansi-dark-tuned"
+}

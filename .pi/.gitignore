@@ -1,0 +1,16 @@
+/agent/.shopify-*
+/agent/auth.json
+/agent/extensions/shopify-*
+/agent/git
+/agent/models-store.json
+/agent/sessions/
+/agent/team-sessions
+/agent/trust.json
+/teams/
+
+
+/agent/skills/binks-pr-review
+/agent/skills/find-skills
+/agent/skills/observe-dashboard-generator-growth-activation
+/agent/skills/quick
+/agent/skills/review-delete-job
