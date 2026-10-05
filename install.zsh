@@ -11,7 +11,7 @@ ln -sf "$from_path/.config/"* ~/.config/
 
 # Only link the sublime folder if the file folder exists
 if [ -d "$HOME/Library/Application Support/Sublime Text" ]; then
-    ln -sf "$from_path/sublime" "$HOME/Library/Application Support/Sublime Text/User"
+    ln -sf "$from_path/sublime" "$HOME/Library/Application Support/Sublime Text/Packages/User"
 fi
 
 # Only link the vscode files if the MacOS application is installed
@@ -26,6 +26,7 @@ fi
 ln -sf "$from_path/.emacs.d" ~/
 # I haven't used tmux in a while, and I think some of the config options no longer apply.
 # ln -sf "$from_path/.tmux.conf" ~/
+ln -sf "$from_path/.pi" ~/
 ln -sf "$from_path/.vim" ~/
 ln -sf "$from_path/.vim_tmp" ~/
 ln -sf "$from_path/.vimrc" ~/
