@@ -71,6 +71,49 @@
   (my-project-find-file))
 
 
+;; Configure magit
+;; Magit buffers that open beside the current window (status, diffs, revisions,
+;; process output) go in the leftmost window instead of to the right.
+(defun my-display-buffer-left (buffer alist)
+  "Display BUFFER in the leftmost window, just right of any side windows.
+If there are side-by-side windows, reuse the leftmost one in the selected
+window's row, whichever window has focus.  Otherwise (a single window, or
+only windows stacked above each other) split off a new full-height window on
+the left.  Side windows such as neotree are never used; if one (or the
+minibuffer) is selected, the most recently used regular window stands in for
+it.  If nothing works, return nil so `display-buffer' carries on with its
+default behavior."
+  (let ((window (if (or (window-parameter nil 'window-side)
+                        (window-minibuffer-p))
+                    (get-mru-window nil nil t)
+                  (selected-window)))
+        next)
+    (when window
+      ;; Walk left to the frame edge, stopping short of side windows.
+      (while (and (setq next (window-in-direction 'left window))
+                  (not (window-parameter next 'window-side)))
+        (setq window next))
+      (setq next (window-in-direction 'right window))
+      (if (and next
+               (not (window-parameter next 'window-side))
+               (not (window-dedicated-p window)))
+          (window--display-buffer buffer window 'reuse alist)
+        (when-let* ((new (split-window-no-error (window-main-window) nil 'left)))
+          (window--display-buffer buffer new 'window alist))))))
+
+(defun my-magit-display-buffer-left (buffer)
+  "Display BUFFER like `magit-display-buffer-traditional', but on the left.
+Buffers magit shows in the current window are unaffected.  For the rest, reuse
+a window already showing BUFFER, else use `my-display-buffer-left'."
+  (let ((display-buffer-base-action
+         '((display-buffer-reuse-window my-display-buffer-left))))
+    (magit-display-buffer-traditional buffer)))
+
+(use-package magit
+  :defer t
+  :custom (magit-display-buffer-function #'my-magit-display-buffer-left))
+
+
 ;; Configure RipGrep via deadgrep
 (use-package deadgrep :bind ("C-c s" . deadgrep))
 

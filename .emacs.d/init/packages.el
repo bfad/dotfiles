@@ -7,5 +7,4 @@
 ;; (NOTE: Built-in packages need `:ensure nil` so no archive lookup is attempted for them.)
 (setq use-package-always-ensure t)
 
-(use-package magit :defer t)
 (use-package visual-fill-column :defer t)
