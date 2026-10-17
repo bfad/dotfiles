@@ -50,6 +50,10 @@
 ;(global-origami-mode)
 
 ;; Configure neotree
+;; macOS binds s-k to kill-current-buffer by default; free it up so it can
+;; act as a prefix key (VS Code style s-k s-b to toggle the sidebar).
+(global-unset-key (kbd "s-k"))
+
 (use-package neotree
   :bind ([f8] . neotree-toggle)
   :custom (neo-window-fixed-size nil))

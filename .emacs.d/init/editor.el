@@ -396,9 +396,14 @@ translation\", which is what happens whenever more input is already pending."
 (global-set-key (kbd "s-z") #'undo-only)
 (global-set-key (kbd "s-Z") #'undo-redo)
 
+;; Mac commands for closing the current buffer / window (frame).
+(global-set-key (kbd "s-w") #'kill-current-buffer)
+(global-set-key (kbd "s-W") #'delete-frame)
+
 ;; Setup these bindings in iTerm/kitty to get GUI commands
 ;; The <f12> key represents the command key in the GUI
-(global-set-key (kbd "<f12> k") 'kill-this-buffer)
+(global-set-key (kbd "<f12> w") #'kill-current-buffer)
+(global-set-key (kbd "<f12> W") #'delete-frame)
 (global-set-key (kbd "<f12> z") 'undo-only)
 (global-set-key (kbd "<f12> Z") 'undo-redo)
 (global-set-key (kbd "<f12> l") 'goto-line)
