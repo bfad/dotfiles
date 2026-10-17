@@ -55,8 +55,12 @@
 (global-unset-key (kbd "s-k"))
 
 (use-package neotree
-  :bind ([f8] . neotree-toggle)
-  :custom (neo-window-fixed-size nil))
+  :bind (([f8] . neotree-toggle)
+         ("s-k s-b" . neotree-toggle)
+         ("<f12> k b" . neotree-toggle))
+  :custom
+  (neo-window-fixed-size nil)
+  (neo-show-hidden-files t))
 
 ;; Show the project in neotree when switching projects, then pick a file.
 (defun my-neotree-project-action ()
